@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "722222416387",
+    "project_id": "marvel-app-c346c",
+    "storage_bucket": "marvel-app-c346c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722222416387:android:3d30e210069ea196ea0436",
+        "android_client_info": {
+          "package_name": "com.example.marvelapp.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722222416387-fdi5b9dtusjq3so9r89m8ho8lp9p7kij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABlBPqWHOiGr57XUDAmLmf9N67LQjECds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722222416387-fdi5b9dtusjq3so9r89m8ho8lp9p7kij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
