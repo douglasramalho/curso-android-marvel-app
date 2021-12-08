@@ -5,6 +5,10 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.39114583333333336" />
         <entry key="..\:/Users/joselaine.aparecida/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/joselaine.aparecida/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/joselaine.aparecida/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/fragment_characters.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/joselaine.aparecida/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/fragment_favorites.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/joselaine.aparecida/StudioProjects/curso-android-marvel-app/app/src/main/res/menu/app_menu_items.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.3861538461538462" />
         <entry key="app/src/main/res/drawable/ic_dissatisfied.xml" value="0.4066666666666667" />
         <entry key="app/src/main/res/drawable/ic_img_loading_error.xml" value="0.14074074074074075" />
@@ -23,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
