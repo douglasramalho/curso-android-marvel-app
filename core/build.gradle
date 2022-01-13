@@ -30,4 +30,7 @@ dependencies{
 
     //Coroutine core
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    // Unit tests
+    testImplementation project(":testing")
 }

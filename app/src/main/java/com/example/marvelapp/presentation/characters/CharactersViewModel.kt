@@ -6,19 +6,19 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core.domain.model.Character
-import com.example.core.usecase.GetCharactersUserCase
+import com.example.core.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val getCharactersUserCase: GetCharactersUserCase
+    private val getCharactersUserCase: GetCharactersUseCase
 ) : ViewModel() {
 
     fun charactersPagingData(query: String): Flow<PagingData<Character>> {
         return getCharactersUserCase(
-            GetCharactersUserCase.GetCharactersParams(query, getPageConfig())
+            GetCharactersUseCase.GetCharactersParams(query, getPageConfig())
         ).cachedIn(viewModelScope)
     }
 
