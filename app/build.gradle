@@ -17,6 +17,15 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
+    signingConfigs {
+        release {
+            storeFile file('/Users/Walcker/ANDROIDSTUDIO/Vitor/curso-android-marvel-app/store/app_key_marvel_store')
+            storePassword 'walcker178977'
+            keyAlias 'marvel_app'
+            keyPassword 'walcker178977'
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.marvelapp"
         minSdkVersion 23
@@ -32,8 +41,21 @@ android {
     }
 
     buildTypes {
+        debug{
+            applicationIdSuffix '.debug'
+            debuggable = true
+        }
+        staging{
+            initWith debug
+            minifyEnabled true
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+                    'proguard-rules-staging.pro'
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
