@@ -1,0 +1,6 @@
+package br.com.nicolas.core.data.network.response
+
+data class ThumbnailResponse(
+    val path: String,
+    val extension: String
+)
