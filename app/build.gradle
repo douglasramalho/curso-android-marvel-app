@@ -26,9 +26,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY']
-        buildConfigField "String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY']
-        buildConfigField "String","BASE_URL", '"https://gateway.marvel.com/v1/public/"'
+        buildConfigField ("String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY'])
+        buildConfigField ("String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY'])
+        buildConfigField ("String","BASE_URL", '"https://gateway.marvel.com/v1/public/"')
     }
 
     buildTypes {
@@ -69,6 +69,11 @@ dependencies {
     def coroutines = "1.5.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    // OkHttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
