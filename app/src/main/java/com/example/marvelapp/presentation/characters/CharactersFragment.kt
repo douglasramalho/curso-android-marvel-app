@@ -1,20 +1,27 @@
 package com.example.marvelapp.presentation.characters
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import br.com.nicolas.core.domain.model.Character
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
 
     private var _binding: FragmentCharactersBinding? = null
     private val binding: FragmentCharactersBinding get() = _binding!!
+
+    private val viewModel: CharactersViewModel by viewModels()
 
     private val charactersAdapter = CharactersAdapter()
 
@@ -33,22 +40,12 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
 
-        charactersAdapter.submitList(
-            listOf(
-                Character(
-                    "Spider Man",
-                    "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg"
-                ),
-                Character(
-                    "Spider Man",
-                    "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg"
-                ),
-                Character(
-                    "Spider Man",
-                    "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg"
-                ),
-            )
-        )
+        lifecycleScope.launch {
+            viewModel.characterPagingData("").collect { pagingData ->
+                charactersAdapter.submitData(pagingData)
+                Log.d("TATATAT", pagingData.toString())
+            }
+        }
     }
 
     private fun initCharactersAdapter() {

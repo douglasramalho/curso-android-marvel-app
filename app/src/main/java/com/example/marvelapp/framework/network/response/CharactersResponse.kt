@@ -12,5 +12,6 @@ fun CharactersResponse.toCharacterModel(): Character {
     return Character(
         name = this.name,
         imageUrl = "${this.thumbnail.path}.${thumbnail.extension}"
+            .replace("http", "https")
     )
 }
