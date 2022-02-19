@@ -9,6 +9,6 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.marvelapp.presentation.about.AboutFragment"
-        android:label="fragment_about"
+        android:label="@string/about_screen_title"
         tools:layout="@layout/fragment_about" />
 </navigation>
