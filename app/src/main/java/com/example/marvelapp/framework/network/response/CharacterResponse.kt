@@ -1,6 +1,4 @@
-package com.example.core.data.network.response
-
-import com.example.core.data.network.response.ThumbnailResponse
+package com.example.marvelapp.framework.network.response
 
 data class CharacterResponse(
     val id: String,
