@@ -21,7 +21,7 @@ class CharactersViewHolder(
     fun bind(character: Character) {
         textName.text = character.name
         imageCharacter.transitionName = character.name
-        imageLoader.load(imageCharacter, character.imageUrl, R.drawable.ic_img_loading_error)
+        imageLoader.load(imageCharacter, character.imageUrl)
 
         itemView.setOnClickListener {
             onItemClick.invoke(character, imageCharacter)
