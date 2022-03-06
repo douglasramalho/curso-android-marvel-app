@@ -1,7 +1,6 @@
 package com.example.core.domain.model
 
-data class Character(
+data class Event(
     val id: Int,
-    val name: String,
     val imageUrl: String
 )
