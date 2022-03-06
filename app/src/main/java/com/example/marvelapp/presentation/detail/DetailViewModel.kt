@@ -11,7 +11,6 @@ import com.example.core.usecase.base.ResultStatus
 import com.example.marvelapp.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +23,8 @@ class DetailViewModel @Inject constructor(
     val uiState: LiveData<UiState> get() = _uiState
 
     fun getCharacterCategories(characterId: Int) = viewModelScope.launch {
-        getCharacterCategoriesUseCase(GetCharacterCategoriesUseCase.GetComicsParams(characterId))
+        getCharacterCategoriesUseCase
+            .invoke(GetCharacterCategoriesUseCase.GetCategoriesParams(characterId))
             .watchStatus()
     }
 
