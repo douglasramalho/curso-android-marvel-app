@@ -1,0 +1,24 @@
+package com.example.testing.model
+
+import br.com.nicolas.core.domain.model.Character
+
+class CharacterFactory {
+
+    fun create(hero : Hero) = when(hero){
+        Hero.ThreeDMan -> Character(
+            "3-D Man",
+            "https://i.annihil.us/u/prod/marvel/i/img/c/ec0/535fecbbb9784.jpg"
+        )
+        Hero.ABomb ->{
+            Character(
+                "A-Bomb (HAS)",
+                "https://i.annihil.us/u/prod/marvel/i/img/c/ec0/5232158de5b16.jpg"
+            )
+        }
+    }
+
+    sealed class Hero{
+        object ThreeDMan : Hero()
+        object ABomb : Hero()
+    }
+}
