@@ -7,6 +7,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
+// nos permite serializar e deserializar objetos kotlin
 
 android {
     compileSdkVersion 31
@@ -31,6 +32,10 @@ android {
 }
 
 dependencies {
+    // preciso fazer com que nosso modulo app veja o modulo core
+
+    implementation project(':core')
+
 
     // AndroidX
     implementation 'androidx.core:core-ktx:1.6.0'
