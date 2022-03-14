@@ -1,8 +1,5 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
@@ -14,8 +11,8 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     signingConfigs {
         release {
@@ -27,17 +24,22 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.marvelapp"
-        minSdkVersion 23
-        targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.customTestRunner
+        testInstrumentationRunnerArguments clearPackageData: 'true'
 
         buildConfigField "String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY']
         buildConfigField "String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY'] 
         buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com/v1/public/"'
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
     buildTypes {
@@ -60,11 +62,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = rootProject.ext.javaVersion
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
 
@@ -74,58 +76,55 @@ android {
 }
 
 dependencies {
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def masterTestDependencies = rootProject.ext.masterTestDependencies
+    def masterDependencies = rootProject.ext.masterDependencies
+    def dataDependencies = rootProject.ext.dataDependencies
 
-    implementation project(':core')
+    implementation project(rootProject.ext.modules.core)
 
-    // AndroidX
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    //Android
+    implementation masterDependencies.constraintlayout
+    implementation masterDependencies.androidCoreKtx
+    implementation masterDependencies.legacySupport
+    implementation masterDependencies.appcompat
 
-    // Material design
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation(dataDependencies.roomCompiler) {
+        exclude group: 'com.intellij', module: 'annotations'
+    }
+    implementation dataDependencies.roomRuntime
+    implementation dataDependencies.roomKtx
 
-    // Navigation
-    def nav_version = '2.4.0-alpha05'
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    // ViewModel and LiveData
-    def lifecycle_version = "2.4.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    // Libs
+    implementation presentationDependencies.lifecycleViewmodel
+    implementation presentationDependencies.navigationFragment
+    implementation presentationDependencies.lifecycleLivedata
+    implementation presentationDependencies.lifecycleRuntime
+    implementation presentationDependencies.materialVersion
+    implementation presentationDependencies.navigationUi
+    implementation presentationDependencies.glideGlide
+    implementation presentationDependencies.datastore
+    implementation presentationDependencies.shimmer
+    kapt presentationDependencies.glideCompiler
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-
-    // Dagger Hilt
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    // Room
-    def room_version = "2.3.0"
-    implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-
-    // Paging3
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-
-    // Glide
-    def glide_version = "4.12.0"
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
-
-    // Other Libs
-    implementation 'com.facebook.shimmer:shimmer:0.5.0'
-    implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
-
-    // Unit tests
+    // Tests
+    androidTestImplementation presentationTestDependencies.espressoContrib
+    androidTestImplementation presentationTestDependencies.mockWebServer
+    androidTestImplementation presentationTestDependencies.espressoCore
+    debugImplementation presentationTestDependencies.fragmentTest
+    androidTestUtil presentationTestDependencies.orchestrator
     testImplementation project(":testing")
-    testImplementation "androidx.room:room-testing:$room_version"
 
-    // Instrumentation tests
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation masterTestDependencies.junitTestVersion
+    androidTestImplementation masterTestDependencies.runnerTest
+    implementation masterTestDependencies.roomTesting
+
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
