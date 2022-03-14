@@ -35,7 +35,7 @@ ext{
     customTestRunner = "com.example.marvelapp.CustomTestRunner"
     mockWebServerVersion = "4.9.3"
     orchestratorVersion = "1.4.1"
-    espressoVersion = "3.4.0"
+    espressoVersion = "3.3.0"
     fragmentVersion = "1.4.1"
     runnerVersion = "1.4.0"
     junitTestVersion = "1.1.3"
