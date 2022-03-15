@@ -7,6 +7,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
+// ele vai buscar esse arquivo
+// estou voltando uma pasta pra tras
+// estou saindo da pasta app
+// estou entrando na pasta config
+apply from: '../config/detekt/detekt.gradle'
 // nos permite serializar e deserializar objetos kotlin
 
 android {
@@ -29,6 +34,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions{
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+    buildFeatures{
+        viewBinding = true
+    }
+
 }
 
 dependencies {
