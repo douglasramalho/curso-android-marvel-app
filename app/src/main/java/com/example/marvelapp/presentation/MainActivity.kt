@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.ActivityMainBinding
 
@@ -25,9 +26,27 @@ class MainActivity : AppCompatActivity() {
 
 
         navController = navHostFragment.navController
+        // faz com que o nav controller gerencie essa navegacao
+        // ele trabalha com back button
+        // trabalha selecionando os botoes corretamente
+        binding.bottomNavMain.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()
+            setOf(R.id.charactersFragment, R.id.favoritesFragment, R.id.aboutFragment)
         )
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // toda vida que a gente mudar de destino
+            // esse listener vai ser disparado
+            // e vai entregar qual que e o destino atual
+            // esse destino e primeiro do meu grafo de navegacao
+            val isTopLevelDestination =
+                appBarConfiguration.topLevelDestinations.contains(destination.id)
+            if (!isTopLevelDestination) {
+                binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+
+            }
+        }
 
 
     }
