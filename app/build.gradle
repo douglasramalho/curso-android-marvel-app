@@ -13,6 +13,9 @@ apply plugin: 'kotlin-parcelize'
 // estou entrando na pasta config
 apply from: '../config/detekt/detekt.gradle'
 // nos permite serializar e deserializar objetos kotlin
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdkVersion 31
@@ -24,8 +27,15 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY']
+        buildConfigField "String", "PRIVATE_SECRET", apikeyProperties['PRIVATE_SECRET']
+        buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com/v1/public/"'
+        // preciso colocar aspas simples entre aspas duplas pq se nao ele nao entende que e uma string
+
+        // cria pra nos uma constante dentro de uma classe buildConfigField
+        // e nos temos acesso a esse arquivo em toda nossa aplicacao
+        // nao consigo visualizar qual que e minha chave publica e qual que eh minha chave privada
     }
 
     buildTypes {
@@ -38,11 +48,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 
