@@ -1,4 +1,4 @@
-package com.example.marvelapp.presentation.about
+package com.example.marvelapp.presentation.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

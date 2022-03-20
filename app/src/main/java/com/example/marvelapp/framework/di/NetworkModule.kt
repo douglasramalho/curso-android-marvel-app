@@ -22,7 +22,7 @@ object NetworkModule {
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
+        return HttpLoggingInterceptor().apply{
             setLevel(
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
@@ -32,18 +32,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .build()
-    }
-
-    @Provides
-    fun provideAuthorizationInterceptor(): AuthorizationInterceptor{
+    fun provideAuthorizationInterceptor(): AuthorizationInterceptor {
         return AuthorizationInterceptor(
             publicKey = BuildConfig.PUBLIC_KEY,
             privateKey = BuildConfig.PRIVATE_KEY,
@@ -52,14 +41,27 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        authorizationInterceptor: AuthorizationInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(authorizationInterceptor)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    fun providesRetrofit(
+    fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory
+        converterFactory: GsonConverterFactory,
     ): MarvelApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)

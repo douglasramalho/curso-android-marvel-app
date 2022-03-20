@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.core.domain.model.Character
-import com.example.marvelapp.R
 import com.example.marvelapp.databinding.FragmentCharactersBinding
-import com.example.marvelapp.presentation.about.CharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
