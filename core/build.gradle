@@ -9,16 +9,22 @@ java {
 }
 
 dependencies {
+
+    // o que significa o api
+    // significa que o modulo core tem acesso a essas dependencias
+    // e todo mundo que utiliza o modulo core vai ter acesso a essas dependencias
+    // OkHttp
+    api(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+    api("com.squareup.okhttp3:okhttp")
+    api("com.squareup.okhttp3:logging-interceptor")
     // Retrofit
     def retrofit_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     // gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    api 'com.google.code.gson:gson:2.8.6'
 
     // interceptor
 //    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
-
-
 
 }
