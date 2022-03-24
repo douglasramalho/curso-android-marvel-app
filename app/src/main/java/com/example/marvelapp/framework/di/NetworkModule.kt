@@ -1,14 +1,17 @@
 package com.example.marvelapp.framework.di
 
+import br.com.dio.core.data.netowork.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -33,6 +36,9 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    private const val TIMEOUT_SECONDS = 15L
+
     // sabemos que tudo o que for ficar dentro de network sao coisas que vao ser utilizadas por toda
     // nossa aplicacao
     // nao apenas por uma activity ou fragment e sim todos os fragmentos e activities
@@ -72,15 +78,30 @@ object NetworkModule {
         }
     }
 
+    @Provides
+    fun providesAuthorizationInterceptor(): AuthorizationInterceptor{
+        return AuthorizationInterceptor(
+            publicKey = BuildConfig.PUBLIC_KEY,
+            privateKey = BuildConfig.PRIVATE_SECRET,
+            calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+
+        )
+    }
+
 
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        authorizationInterceptor: AuthorizationInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+                // temos um interceptador que vai dar o log de todas as request
             .addInterceptor(loggingInterceptor)
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+                // temos um interceptador que vai pegar a request e alterar cada uma para colocar o hash
+                // pedido na doc da marvel
+            .addInterceptor(authorizationInterceptor)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
     }
 
@@ -107,6 +128,7 @@ object NetworkModule {
             .addConverterFactory(converterFactory)
             .build()
     }
+
 
 
 }
