@@ -6,8 +6,10 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.39114583333333336" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.3861538461538462" />
         <entry key="app/src/main/res/drawable/ic_dissatisfied.xml" value="0.4066666666666667" />
+        <entry key="app/src/main/res/drawable/ic_favorite_checked.xml" value="0.231" />
         <entry key="app/src/main/res/drawable/ic_img_loading_error.xml" value="0.14074074074074075" />
         <entry key="app/src/main/res/drawable/ic_img_placeholder.xml" value="0.303" />
+        <entry key="app/src/main/res/drawable/ic_not_favorite_unchecked.xml" value="0.231" />
         <entry key="app/src/main/res/drawable/ic_placeholder.xml" value="0.2875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.37604166666666666" />

@@ -18,6 +18,27 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ViewFlipper
+        android:id="@+id/flipper_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_favorite_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            tools:srcCompat="@drawable/ic_favorite_checked" />
+
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+    <ViewFlipper
         android:id="@+id/flipper_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"

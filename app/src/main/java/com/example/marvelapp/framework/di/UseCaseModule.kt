@@ -4,6 +4,8 @@ import com.example.core.usecase.GetCharactersUseCase
 import com.example.core.usecase.GetCharactersUseCaseImpl
 import com.example.core.usecase.GetCharacterCategoriesUseCase
 import com.example.core.usecase.GetCharacterCategoriesUseCaseImpl
+import com.example.core.usecase.AddFavoriteUseCase
+import com.example.core.usecase.AddFavoriteUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,4 +22,7 @@ interface UseCaseModule {
     fun bindGetComicsUseCase(
         useCase: GetCharacterCategoriesUseCaseImpl
     ): GetCharacterCategoriesUseCase
+
+    @Binds
+    fun bindAddFavoriteUseCase(useCase: AddFavoriteUseCaseImpl): AddFavoriteUseCase
 }
