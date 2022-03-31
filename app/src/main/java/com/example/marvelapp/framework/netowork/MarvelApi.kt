@@ -1,6 +1,6 @@
-package br.com.dio.core.data.netowork
+package com.example.marvelapp.framework.netowork
 
-import br.com.dio.core.data.netowork.response.DataWrapperResponse
+import com.example.marvelapp.framework.netowork.response.DataWrapperResponse
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 

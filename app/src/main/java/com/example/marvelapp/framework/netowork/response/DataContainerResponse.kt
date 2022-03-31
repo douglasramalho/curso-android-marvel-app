@@ -1,4 +1,4 @@
-package br.com.dio.core.data.netowork.response
+package com.example.marvelapp.framework.netowork.response
 
 data class DataContainerResponse(
     val results: List<CharactersResponse>

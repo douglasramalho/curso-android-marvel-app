@@ -1,4 +1,4 @@
-package br.com.dio.core.data.netowork.interceptor
+package com.example.marvelapp.framework.netowork.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

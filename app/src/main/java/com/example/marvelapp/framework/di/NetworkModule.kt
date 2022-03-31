@@ -1,12 +1,11 @@
 package com.example.marvelapp.framework.di
 
-import br.com.dio.core.data.netowork.interceptor.AuthorizationInterceptor
+import com.example.marvelapp.framework.netowork.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
