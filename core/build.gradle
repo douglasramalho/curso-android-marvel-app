@@ -25,7 +25,17 @@ dependencies {
     // gson
     api 'com.google.code.gson:gson:2.8.6'
 
-    // interceptor
-//    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    implementation "androidx.paging:paging-common:$paging_version"
+    // ela nao traz classes que estao fortemente ligadas com framework do android
+    // vamos ter apenas classes puras aqui, sem nenhuma dependencia.
 
+
+    // Javax inject
+    // ele vai apenas deixar com que eu use aquelas anotacoes @ inject
+    // trouxe essa aqui pq vamos trabalhar com javax hilt
+    // isolando o maximo o meu core de dependencia do meu framework do android
+    implementation "javax.inject:javax.inject:1"
+
+    // Coroutine core
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 }
