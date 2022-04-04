@@ -2,6 +2,7 @@ package com.example.marvelapp.framework.di
 
 import com.example.marvelapp.framework.netowork.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
+import com.example.marvelapp.framework.netowork.MarvelApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -83,7 +84,6 @@ object NetworkModule {
             publicKey = BuildConfig.PUBLIC_KEY,
             privateKey = BuildConfig.PRIVATE_SECRET,
             calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-
         )
     }
 
@@ -108,10 +108,7 @@ object NetworkModule {
     // nao conheco a implementacao dessas classes.
     // e pra isso utilizamos o provides
     @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory{
-        return GsonConverterFactory.create()
-
-    }
+    fun provideGsonConverterFactory(): GsonConverterFactory{ return GsonConverterFactory.create() }
 
     // como ele sabe instanciar o okHttpClient
     // ele ve que tem uma funcao provides que fornece um retorno okHttpClient
@@ -120,12 +117,14 @@ object NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
-    ): Retrofit {
+    ): MarvelApi {
+        // aqu estou injetando pra quem precisa esse MarvelAPi
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
+            .create(MarvelApi::class.java)
     }
 
 

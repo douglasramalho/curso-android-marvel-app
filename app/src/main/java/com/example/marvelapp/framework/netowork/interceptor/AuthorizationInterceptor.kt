@@ -11,7 +11,6 @@ class AuthorizationInterceptor(
     private val publicKey: String,
     private val privateKey: String,
     private val calendar: Calendar
-
 ) : Interceptor {
 
     @Suppress("MagicNumber")
