@@ -1,8 +1,8 @@
 package com.example.marvelapp.framework.remote
 
 import br.com.dio.core.data.repository.CharactersRemoteDataSource
-import com.example.marvelapp.framework.netowork.MarvelApi
-import com.example.marvelapp.framework.netowork.response.DataWrapperResponse
+import com.example.marvelapp.framework.network.MarvelApi
+import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import javax.inject.Inject
 
 
@@ -12,6 +12,10 @@ import javax.inject.Inject
 // como o dagger hilt vai saber criar uma instancia desse RetrofitCharactersDataSource aqui ?
 // @Inject
 // classes que sao nossas, ou seja implementacoes nossas, precisamos passar apenas o @ Inject
+// como estamos utilizando uma interface CharactersRemoteDataSource apenas o @Inject
+// nao vai dar certo, pq temos que ensinar o dagger hilt qual implementacao ele tem que injetar
+// pra essa interface aqui .
+// e pra isso aprendemos que temos que criar um modulo de injecao de dependencia
 
 class RetrofitCharactersDataSource @Inject constructor(
     private val marvelApi: MarvelApi

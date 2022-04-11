@@ -1,4 +1,4 @@
-package com.example.marvelapp.framework.netowork.response
+package com.example.marvelapp.framework.network.response
 
 data class ThumbnailResponse(
     val path: String,

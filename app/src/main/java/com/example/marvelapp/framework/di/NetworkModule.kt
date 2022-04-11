@@ -1,8 +1,8 @@
 package com.example.marvelapp.framework.di
 
-import com.example.marvelapp.framework.netowork.interceptor.AuthorizationInterceptor
+import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
-import com.example.marvelapp.framework.netowork.MarvelApi
+import com.example.marvelapp.framework.network.MarvelApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -126,7 +126,5 @@ object NetworkModule {
             .build()
             .create(MarvelApi::class.java)
     }
-
-
 
 }

@@ -1,6 +1,6 @@
-package com.example.marvelapp.framework.netowork
+package com.example.marvelapp.framework.network
 
-import com.example.marvelapp.framework.netowork.response.DataWrapperResponse
+import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
