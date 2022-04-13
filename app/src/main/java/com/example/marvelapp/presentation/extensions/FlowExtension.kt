@@ -4,9 +4,9 @@ import com.example.core.usecase.base.ResultStatus
 import kotlinx.coroutines.flow.Flow
 
 suspend fun <T> Flow<ResultStatus<T>>.watchStatus(
-    loading: () -> Unit = {},
-    success: (data: T) -> Unit,
-    error: (throwable: Throwable) -> Unit
+    loading: suspend () -> Unit = {},
+    success: suspend (data: T) -> Unit,
+    error: suspend (throwable: Throwable) -> Unit
 ) {
     collect { status ->
         when (status) {
