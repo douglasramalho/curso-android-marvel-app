@@ -98,7 +98,7 @@ class CharactersFragment : Fragment() {
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
                         binding.includeViewCharactersErrorState.buttonTrying.setOnClickListener {
-                            characterAdapter.refresh()
+                            characterAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
                     }
