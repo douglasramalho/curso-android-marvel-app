@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import br.com.dio.core.domain.model.Character
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 // isso permite que o CharactersFragment possa trabalhar com injecao de dependencia
@@ -43,6 +47,14 @@ class CharactersFragment : Fragment() {
     // da forma que estava antes sem o get ja tenta passar uma instancia desse cara _binding!!
     // pra dentro do meu binding e claro  ele vai chamar isso antes do meu onCreateView
     private val binding: FragmentCharactersBinding get() = _binding!!
+    private val viewModel: CharactersViewModel by viewModels()
+    // isso aqu nao tem nada a ver com hilt e sim com componentes de arquitetura do android
+    // nao vamos implementar um factory, mas o dagger hilt sabe atravez do androidEntryPoint
+    // e por saber que nosso charactersViewModel tem HiltViewModel
+    // ele vai conseguir instanciar um viewModel passando todas as dependencias que ele precisa
+    // vai injetar todos os outros componentes que o viewModel precisa
+    // e vai entregar pra gente esse viewModel pronto para usar
+
 
     // vou instanciar o nosso adapter fora do ciclo de vida dos nosso metodos aqui
     // pois quando eu tiver em outra tela e voltar ele vai chamar o onViewCreated denovo
@@ -74,13 +86,18 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
 
-        characterAdapter.submitList(
-                listOf(
-                        Character("3D Man", "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"),
-                        Character("Spider Man", "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"),
-                        Character("Spider Man", "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"),
-                )
-        )
+        // como o nosso charactersPagingData retorna um flow de pagingData
+        // eu consigo escutar aqui atraves da funcao collect
+
+        lifecycleScope.launch{
+            viewModel.charactersPagingData("").collect { pagingData ->
+                // collect
+                // vai dar um erro que ele espera que esse carinha precisa ser chamao dentro de um scopo de coroutines.
+                // o Paging Source, adaptador espera do paging
+                characterAdapter.submitData(pagingData)
+
+            }
+        }
     }
 //    setHasFixedSize(true) torna o meu recyclerView mais performático
     // pq eu sei que all itens vao ter o mesmo tamanho altura e largura fixa e nem quebrar ou aumentar

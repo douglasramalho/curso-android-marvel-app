@@ -16,6 +16,7 @@ class CharactersPagingSource(
     private val remoteDateSource: CharactersRemoteDataSource<DataWrapperResponse>,
     private val query: String
 ) : PagingSource<Int, Character>() {
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         // aqui dentro que vamos ter os detalhes de implementacao
         // lembrando o paging trabalha com coroutine entao ele automaticamente trouxe funcoes com
@@ -84,6 +85,7 @@ class CharactersPagingSource(
             )
 
         } catch (exception: Exception) {
+            // eu nao quero especificar o erro que vai ser capturado aqui
             LoadResult.Error(exception)
         }
     }
