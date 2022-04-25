@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/home">
+
+    <include app:graph="@navigation/characters" />
+    <include app:graph="@navigation/favorites" />
+    <include app:graph="@navigation/about" />
+</navigation>
