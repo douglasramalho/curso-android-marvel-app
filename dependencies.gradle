@@ -19,6 +19,7 @@ ext{
 
     //Kotlin
     kotlinGradleVersion = "1.6.10"
+    kotlinxCoroutines = "1.6.0"
 
     //Libs
     datastoreVersion  = "1.0.0"
@@ -42,7 +43,6 @@ ext{
     junitVersion = "4.13.2"
     okhttp3Version = "4.9.0"
     coreTestingVersion = "2.1.0"
-    kotlinxCoroutinesTest = "1.5.1"
     mockitoVersion = "2.2.0"
 
     modules = [
@@ -53,6 +53,7 @@ ext{
     masterDependencies = [
             constraintlayout     : "androidx.constraintlayout:constraintlayout:$androidConstraintLayoutVersion",
             appcompat            : "androidx.appcompat:appcompat:$androidAppCompatVersion",
+            coroutines_android   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutines",
             legacySupport        : "androidx.legacy:legacy-support-v4:$legacyVersion",
             androidCoreKtx       : "androidx.core:core-ktx:$androidCoreKtxVersion",
             gradleVersion        : "com.android.tools.build:gradle:$gradleVersion",
@@ -62,6 +63,7 @@ ext{
     commonDependencies = [
             javaxDep             : "javax.inject:javax.inject:$javaxVersion",
             gson                 : "com.google.code.gson:gson:$gsonVersion",
+            coroutines_core      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines",
             retrofit             : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retrofitConverter    : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
             okhttp3              : "com.squareup.okhttp3:okhttp-bom:$okhttp3Version",
@@ -75,7 +77,7 @@ ext{
             runnerTest           : "androidx.test:runner:$runnerVersion",
             junitVersion         : "junit:junit:$junitVersion",
             coreTestingVersion   : "androidx.arch.core:core-testing:$coreTestingVersion",
-            kotlinxCoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutinesTest",
+            kotlinxCoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutines",
             mockitoVersion       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion"
     ]
 
