@@ -15,14 +15,12 @@ dependencies{
 
     implementation commonDependencies.javaxDep
     api commonDependencies.retrofitConverter
+    api commonDependencies.coroutines_core
     api commonDependencies.retrofit
     api commonDependencies.gson
 
     //Paging3 Common
     implementation "androidx.paging:paging-common:$paging_version"
-
-    //Coroutine core
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
     testImplementation project(rootProject.ext.modules.testing)
 }

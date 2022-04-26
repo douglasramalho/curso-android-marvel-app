@@ -89,6 +89,7 @@ dependencies {
     implementation masterDependencies.androidCoreKtx
     implementation masterDependencies.legacySupport
     implementation masterDependencies.appcompat
+    implementation masterDependencies.coroutines_android
 
     implementation(dataDependencies.roomCompiler) {
         exclude group: 'com.intellij', module: 'annotations'
@@ -108,7 +109,6 @@ dependencies {
     implementation presentationDependencies.shimmer
     kapt presentationDependencies.glideCompiler
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

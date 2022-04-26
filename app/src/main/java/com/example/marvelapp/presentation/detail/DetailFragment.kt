@@ -57,7 +57,7 @@ class DetailFragment : Fragment() {
                     }
                     is DetailViewModel.UiState.Error -> {
                         binding.includeErrorView.buttonTrying.setOnClickListener {
-                            viewModel.getCaracterCatergories(detailViewArg.characterId)
+                            viewModel.getCharacterCategories(detailViewArg.characterId)
                         }
                         FLIPPER_CHILD_POSITION_ERROR
                     }
@@ -65,7 +65,7 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-        viewModel.getCaracterCatergories(detailViewArg.characterId)
+        viewModel.getCharacterCategories(detailViewArg.characterId)
     }
 
     //Define a animação da transição como "move" id do receptor e do emisor deve ser o mesmo
