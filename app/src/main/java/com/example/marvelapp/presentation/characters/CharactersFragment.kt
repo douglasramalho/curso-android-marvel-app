@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import br.com.dio.core.domain.model.Character
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -64,15 +68,20 @@ class CharactersFragment : Fragment() {
     // instanciando fora dos meus ciclos de vida garante que quando eu voltar
     // pra essa tela apartir de uma outra tela eu vou ter o meu adapter no mesmo estado
     // nao vou recriar ele novamente
-    private val characterAdapter = CharactersAdapter()
+    // estou iniciando esse carinha diretamente dentro do meu frament
+    // toda vez que eu coloco o meu aplicativo em background ou chamo uma tela, e volto pra essa tela.
+    // ele ia instanciar novamente essa carinha. E dentro dele ia ter um estado que ele ia ficar
+    // adicionando novos carinhas dentro desse estado, isso nao eh legal.
+    // no lugar de instanciar assim eu vou usar o late init var
+    private lateinit var characterAdapter: CharactersAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ) = FragmentCharactersBinding.inflate(
-            inflater,
-            container,
-            false
+        inflater,
+        container,
+        false
     ).apply {
         // atribuimos aqui a instancia do nosso FragmentCharactersBinding
         // no caso ele espera um root retornado
@@ -85,31 +94,132 @@ class CharactersFragment : Fragment() {
         // e se esse ja foi implementado o binding tambem ja foi
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
+        observeInitialLoadState()
 
         // como o nosso charactersPagingData retorna um flow de pagingData
         // eu consigo escutar aqui atraves da funcao collect
 
-        lifecycleScope.launch{
-            viewModel.charactersPagingData("").collect { pagingData ->
-                // collect
-                // vai dar um erro que ele espera que esse carinha precisa ser chamao dentro de um scopo de coroutines.
-                // o Paging Source, adaptador espera do paging
-                characterAdapter.submitData(pagingData)
+        // existe uma maneira mais segura de observar um estado no fragment usando flow
+        // observar o estado do flow apenas dentro do launch
+        // ele eh inseguro pq como nosso aplicativo vai pra background
+        // esse flow aqui continua escutando
+        // se meu aplicativo esta em background
+        // e por algum acaso esse pagingData retorna alguma coisa nova
+        // enquanto o aplicativo esta em background
+        // o nosso flow vai continuar recebendo esses estados, quando ele chamar esse submitData do
+        // adapter o adapter nao vai ta visivel no momento e podemos ter um crash em tempo de execucao
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // automaticamente quando nosso aplicativo for pra background
+                // ele vai fazer o stop desse flow, ai esse flow vai parar de escutar as atualizacoes
+                // e quando o usuario voltar pro aplicativo.
+                // e abrir o fragmento de personagens ele vai iniciar a coletar novamente esse fluxo
+                // de personagens quando o nosso ciclo de vida do nosso fragmento estiver no on Start
+                viewModel.charactersPagingData("").collect { pagingData ->
+                    // collect  vai dar um erro que ele espera que esse carinha precisa ser chamao
+                    // dentro de um scopo de coroutines.
+                    // o Paging Source, adaptador espera do paging
+                    characterAdapter.submitData(pagingData)
+                }
             }
         }
     }
+
+
 //    setHasFixedSize(true) torna o meu recyclerView mais performático
     // pq eu sei que all itens vao ter o mesmo tamanho altura e largura fixa e nem quebrar ou aumentar
     // o tamanho do nosso layout
 
 
     private fun initCharactersAdapter() {
+        characterAdapter = CharactersAdapter()
         with(binding.recyclerCharacters) {
+            scrollToPosition(0)
             setHasFixedSize(true)
-            adapter = characterAdapter
+            // geralmente como estamos fazendo com scroll infinito, o usuario sempre vai conseguir ver mais
+            // de baixo pra cima, sempre ver mais eh no final da pagina
+            adapter = characterAdapter.withLoadStateFooter(
+                footer = CharactersLoadingStateAdapter(
+                    characterAdapter::retry
+                // perdemos a conexao com a internet e estamos na pagina 3
+                // o adapter vai guardar o offsset
+                // e assim que clicarmos em retry ele vai tentar exibir o proximo ofsset
+                // ele guarda o estado dentro dele.
+                // automaticamente ele guarda isso pra gente
+
+                )
+            )
+
 
         }
+    }
+
+    private fun observeInitialLoadState() {
+        // o PagingDataAdapter nos fornece um meio de saber que estado esta a tela..
+        // assim eu posso observar e reagir
+        lifecycleScope.launch {
+            characterAdapter.loadStateFlow.collectLatest { loadState ->
+                // vamos fazer verificacao desse carinha pra saber que estado ele esta.
+                binding.flipperCharacters.displayedChild = when (loadState.refresh) {
+                    is LoadState.Loading -> {
+                        // estado de loading eu quero mostrar o nosso shimer
+                        setShimmerVisibility(true)
+                        FLIPPER_CHILD_LOADING
+
+                    }
+
+                    is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+
+                    }
+
+                    is LoadState.Error -> {
+                        setShimmerVisibility(false)
+                        binding.includeViewCharactersErrorState.buttonRetry.setOnClickListener {
+                            // eu teria que chamar novamente a request
+                            // o proprio page adapter tem uma funcao de refresh pra mim
+                            // o nosso Adapter tem o estado e sabe qual que a pagina atual
+                            // qual que eh a proxima pagina
+                            // como ele ja controla tudo isso internamente
+                            // ele sabe que nao conseguimos carregar esse carinha com sucesso
+                            // quando tiver um erro ele vai guardar a pagina que nao foi carregada
+                            // e quando chamar o refresh ele vai fazer o refresh daquela pagina
+                            // o refresh faz e carregar todos os dados
+                            // primeiro ele limpa tudo e dps ele faz a request no indice 0
+                            // que e o nosso offsset
+                            characterAdapter.refresh()
+                        }
+                        FLIPPER_CHILD_ERROR
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setShimmerVisibility(visibility: Boolean) {
+        binding.includeViewCharactersLoadingState.shimmerCharacters.run {
+            // entrei dentro dele.
+            isVisible = visibility
+            // funcao de extensao da biblioteca android x
+            // ao inves de eu setar visibilidade para a view
+            // ao inves de eu chamar uma visibilidade em uma view passando view.gone ou view.visible
+            // eu posso simplesmente chamar o isVisible
+            // entao eu passo o nosso visibility
+            // entao eu passo true aqui a minha view vai esta visivel
+            // se eu passo false a minha view vai esta escondida
+            if (visibility)
+                startShimmer()
+            else stopShimmer()
+        }
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_LOADING = 0
+        private const val FLIPPER_CHILD_CHARACTERS = 1
+        private const val FLIPPER_CHILD_ERROR = 2
     }
 
 }
