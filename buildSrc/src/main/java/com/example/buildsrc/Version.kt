@@ -16,7 +16,7 @@ object Version {
 
     object Classpaths {
         const val gradle = "7.1.1"
-        const val kotlin = "1.6.10"
+        const val kotlin = "1.6.21"
         const val hilt = "2.41"
         const val safeArgs = "2.4.2"
     }

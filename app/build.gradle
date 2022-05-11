@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
 
     Dependencies.AppModule.listLibs.forEach { dependency -> implementation dependency }
     Dependencies.AppModule.listKapt.forEach {dependency -> kapt dependency }
