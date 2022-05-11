@@ -1,4 +1,4 @@
-package com.example.marvelapp
+package com.example.buildsrc
 
 object Dependencies {
 
