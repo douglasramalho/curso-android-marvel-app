@@ -2,6 +2,7 @@ package com.example.marvelapp.presentation.detail
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataScope
 import androidx.lifecycle.MutableLiveData
@@ -21,7 +22,8 @@ class FavoriteUiActionStateLiveData(
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) {
 
-    private var currentFavoriteIcon = R.drawable.ic_favorite_unchecked
+    @set:VisibleForTesting
+    var currentFavoriteIcon = R.drawable.ic_favorite_unchecked
 
     private val action = MutableLiveData<Action>()
     val state: LiveData<UiState> = action.switchMap {
