@@ -7,6 +7,8 @@
     <string name="error_loading_data">Error when trying to load data</string>
     <string name="error_loading_more_try_again">Error when trying to load the next page. Try again</string>
     <string name="error_add_favorite">Error when trying to add favorite</string>
+    <string name="error_remove_favorite">Error when trying to remove favorite</string>
+    <string name="error_check_favorite">Error when trying to check if is favorite</string>
 
     <!-- App Menu -->
     <string name="app_menu_heroes">Heroes</string>
