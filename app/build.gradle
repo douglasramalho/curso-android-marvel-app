@@ -40,6 +40,7 @@ android {
 
     testOptions {
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled = true
     }
 
     buildTypes {
@@ -91,7 +92,7 @@ dependencies {
     implementation masterDependencies.appcompat
     implementation masterDependencies.coroutines_android
 
-    implementation(dataDependencies.roomCompiler) {
+    kapt(dataDependencies.roomCompiler) {
         exclude group: 'com.intellij', module: 'annotations'
     }
     implementation dataDependencies.roomRuntime
@@ -127,4 +128,5 @@ dependencies {
 
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+    androidTestImplementation masterTestDependencies.kotlinxCoroutinesTest
 }

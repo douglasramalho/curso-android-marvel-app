@@ -26,7 +26,6 @@ ext{
     lifecycleVersion = "2.4.1"
     shimmerVersion = "0.5.0"
     glideVersion  = "4.13.1"
-    roomVersion = "2.4.2"
     navVersion = "2.4.1"
     javaxVersion = "1"
     gsonVersion = "2.9.0"
