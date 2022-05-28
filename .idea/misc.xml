@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.39114583333333336" />
+        <entry key="..\:/Users/dougl/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/item_character_load_more_state.xml" value="0.3625" />
+        <entry key="..\:/Users/dougl/StudioProjects/curso-android-marvel-app/app/src/main/res/layout/item_character_refresh_state.xml" value="0.3625" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.3861538461538462" />
         <entry key="app/src/main/res/drawable/ic_dissatisfied.xml" value="0.4066666666666667" />
         <entry key="app/src/main/res/drawable/ic_favorite_checked.xml" value="0.231" />

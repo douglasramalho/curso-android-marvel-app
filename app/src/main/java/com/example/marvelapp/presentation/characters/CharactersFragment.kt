@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import com.example.marvelapp.framework.imageloader.ImageLoader
+import com.example.marvelapp.presentation.characters.adapters.CharactersAdapter
+import com.example.marvelapp.presentation.characters.adapters.CharactersLoadMoreStateAdapter
+import com.example.marvelapp.presentation.characters.adapters.CharactersRefreshStateAdapter
 import com.example.marvelapp.presentation.detail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +32,12 @@ class CharactersFragment : Fragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    private val headerAdapter: CharactersRefreshStateAdapter by lazy {
+        CharactersRefreshStateAdapter(
+            charactersAdapter::retry
+        )
+    }
 
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(imageLoader) { character, view ->
@@ -83,8 +89,9 @@ class CharactersFragment : Fragment() {
         postponeEnterTransition()
         with(binding.recyclerCharacters) {
             setHasFixedSize(true)
-            adapter = charactersAdapter.withLoadStateFooter(
-                footer = CharactersLoadStateAdapter(
+            adapter = charactersAdapter.withLoadStateHeaderAndFooter(
+                header = headerAdapter,
+                footer = CharactersLoadMoreStateAdapter(
                     charactersAdapter::retry
                 )
             )
@@ -98,21 +105,33 @@ class CharactersFragment : Fragment() {
     private fun observeInitialLoadState() {
         lifecycleScope.launch {
             charactersAdapter.loadStateFlow.collectLatest { loadState ->
-                binding.flipperCharacters.displayedChild = when (loadState.refresh) {
-                    is LoadState.Loading -> {
+                headerAdapter.loadState = loadState.mediator
+                    ?.refresh
+                    ?.takeIf {
+                        it is LoadState.Error && charactersAdapter.itemCount > 0
+                    } ?: loadState.prepend
+
+                binding.flipperCharacters.displayedChild = when {
+                    loadState.mediator?.refresh is LoadState.Loading -> {
                         setShimmerVisibility(true)
                         FLIPPER_CHILD_LOADING
                     }
-                    is LoadState.NotLoading -> {
-                        setShimmerVisibility(false)
-                        FLIPPER_CHILD_CHARACTERS
-                    }
-                    is LoadState.Error -> {
+                    loadState.mediator?.refresh is LoadState.Error
+                            && charactersAdapter.itemCount == 0 -> {
                         setShimmerVisibility(false)
                         binding.includeViewCharactersErrorState.buttonRetry.setOnClickListener {
                             charactersAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
+                    }
+                    loadState.source.refresh is LoadState.NotLoading
+                            || loadState.mediator?.refresh is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+                    }
+                    else -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
                     }
                 }
             }
