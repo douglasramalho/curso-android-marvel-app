@@ -1,4 +1,4 @@
-package com.example.marvelapp.utill
+package com.example.marvelapp.presentation.common.utill
 
 import android.view.View
 import com.example.core.domain.model.Character

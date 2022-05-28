@@ -110,6 +110,8 @@ dependencies {
     implementation presentationDependencies.shimmer
     kapt presentationDependencies.glideCompiler
 
+    implementation "com.google.firebase:firebase-config:21.1.0"
+
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

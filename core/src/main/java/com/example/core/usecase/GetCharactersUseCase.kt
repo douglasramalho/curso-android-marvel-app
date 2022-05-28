@@ -1,12 +1,12 @@
-package usecase
+package com.example.core.usecase
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core.data.repository.CharactersRepository
 import com.example.core.domain.model.Character
-import usecase.GetCharactersUseCase.GetCharactersParams
-import usecase.base.PagingUseCase
+import com.example.core.usecase.GetCharactersUseCase.GetCharactersParams
+import com.example.core.usecase.base.PagingUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

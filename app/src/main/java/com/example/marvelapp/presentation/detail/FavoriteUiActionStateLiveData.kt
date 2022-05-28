@@ -9,10 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.example.marvelapp.R
-import com.example.marvelapp.presentation.extensions.watchStatus
-import usecase.AddFavoriteUseCase
-import usecase.CheckFavoriteUseCase
-import usecase.RemoveFavoriteUseCase
+import com.example.marvelapp.presentation.common.extensions.watchStatus
+import com.example.core.usecase.AddFavoriteUseCase
+import com.example.core.usecase.CheckFavoriteUseCase
+import com.example.core.usecase.RemoveFavoriteUseCase
 import kotlin.coroutines.CoroutineContext
 
 class FavoriteUiActionStateLiveData(

@@ -1,7 +1,7 @@
-package com.example.marvelapp.presentation.extensions
+package com.example.marvelapp.presentation.common.extensions
 
 import kotlinx.coroutines.flow.Flow
-import usecase.base.ResultStatus
+import com.example.core.usecase.base.ResultStatus
 
 suspend fun <T> Flow<ResultStatus<T>>.watchStatus(
     loading: suspend () -> Unit = {},

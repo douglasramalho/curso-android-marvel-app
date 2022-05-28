@@ -9,7 +9,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.base.CoroutinesDispatchers
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AppCoroutinesTestDispatcher(

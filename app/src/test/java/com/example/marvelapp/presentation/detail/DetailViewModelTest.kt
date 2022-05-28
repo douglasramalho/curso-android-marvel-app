@@ -22,11 +22,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import usecase.AddFavoriteUseCase
-import usecase.CheckFavoriteUseCase
-import usecase.GetCharacterCategoriesUseCase
-import usecase.RemoveFavoriteUseCase
-import usecase.base.ResultStatus
+import com.example.core.usecase.AddFavoriteUseCase
+import com.example.core.usecase.CheckFavoriteUseCase
+import com.example.core.usecase.GetCharacterCategoriesUseCase
+import com.example.core.usecase.RemoveFavoriteUseCase
+import com.example.core.usecase.base.ResultStatus
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)

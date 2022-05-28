@@ -1,14 +1,14 @@
-package usecase
+package com.example.core.usecase
 
 import com.example.core.data.repository.CharactersRepository
 import com.example.core.domain.model.Comic
 import com.example.core.domain.model.Event
-import usecase.base.ResultStatus
-import usecase.base.UseCase
+import com.example.core.usecase.base.ResultStatus
+import com.example.core.usecase.base.UseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.base.CoroutinesDispatchers
 import javax.inject.Inject
 
 interface GetCharacterCategoriesUseCase {

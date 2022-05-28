@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.example.marvelapp.R
-import com.example.marvelapp.presentation.extensions.watchStatus
-import usecase.GetCharacterCategoriesUseCase
+import com.example.marvelapp.presentation.common.extensions.watchStatus
+import com.example.core.usecase.GetCharacterCategoriesUseCase
 import kotlin.coroutines.CoroutineContext
 
 class UiActionStateLiveData(

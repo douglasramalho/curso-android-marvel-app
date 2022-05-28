@@ -1,11 +1,11 @@
-package usecase
+package com.example.core.usecase
 
 import com.example.core.data.repository.FavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import usecase.base.CoroutinesDispatchers
-import usecase.base.ResultStatus
-import usecase.base.UseCase
+import com.example.core.usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.base.ResultStatus
+import com.example.core.usecase.base.UseCase
 import javax.inject.Inject
 
 interface CheckFavoriteUseCase {

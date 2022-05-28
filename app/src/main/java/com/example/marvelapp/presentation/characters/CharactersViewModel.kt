@@ -14,8 +14,8 @@ import com.example.core.domain.model.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import usecase.GetCharactersUseCase
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.GetCharactersUseCase
+import com.example.core.usecase.base.CoroutinesDispatchers
 import javax.inject.Inject
 
 @HiltViewModel

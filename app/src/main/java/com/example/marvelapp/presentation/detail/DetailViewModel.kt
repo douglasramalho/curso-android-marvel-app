@@ -2,11 +2,11 @@ package com.example.marvelapp.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import usecase.AddFavoriteUseCase
-import usecase.CheckFavoriteUseCase
-import usecase.GetCharacterCategoriesUseCase
-import usecase.RemoveFavoriteUseCase
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.AddFavoriteUseCase
+import com.example.core.usecase.CheckFavoriteUseCase
+import com.example.core.usecase.GetCharacterCategoriesUseCase
+import com.example.core.usecase.RemoveFavoriteUseCase
+import com.example.core.usecase.base.CoroutinesDispatchers
 import javax.inject.Inject
 
 @HiltViewModel

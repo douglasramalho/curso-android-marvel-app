@@ -1,4 +1,4 @@
-package usecase.base
+package com.example.core.usecase.base
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package usecase
+package com.example.core.usecase
 
 import com.example.core.data.repository.CharactersRepository
 import com.example.testing.MainCoroutineRule
@@ -17,7 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import usecase.base.ResultStatus
+import com.example.core.usecase.base.ResultStatus
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)

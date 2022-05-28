@@ -2,11 +2,10 @@ package com.example.marvelapp.framework.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import usecase.base.AppCoroutinesDispatchers
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.base.AppCoroutinesDispatchers
+import com.example.core.usecase.base.CoroutinesDispatchers
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -6,7 +6,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.*
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import usecase.base.CoroutinesDispatchers
+import com.example.core.usecase.base.CoroutinesDispatchers
 
 @ExperimentalCoroutinesApi
 class MainCoroutineRule(

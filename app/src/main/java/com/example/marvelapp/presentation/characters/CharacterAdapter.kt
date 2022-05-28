@@ -5,7 +5,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.core.domain.model.Character
 import com.example.marvelapp.framework.imageloader.ImageLoader
-import com.example.marvelapp.utill.OnCharacterItemClick
+import com.example.marvelapp.presentation.common.utill.OnCharacterItemClick
 import javax.inject.Inject
 
 class CharacterAdapter @Inject constructor(

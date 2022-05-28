@@ -2,23 +2,22 @@ package com.example.marvelapp.presentation.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.example.marvelapp.R
 import com.example.marvelapp.databinding.FragmentDetailBinding
 import com.example.marvelapp.framework.imageloader.ImageLoader
-import com.example.marvelapp.presentation.extensions.showShortToast
+import com.example.marvelapp.presentation.common.extensions.showShortToast
+import com.example.marvelapp.presentation.common.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    private var _binding: FragmentDetailBinding? = null
-    private val binding: FragmentDetailBinding get() = _binding!!
+    private val binding by viewBinding(FragmentDetailBinding::bind)
 
     private val viewModel: DetailViewModel by viewModels()
 
@@ -26,13 +25,6 @@ class DetailFragment : Fragment() {
     lateinit var imageLoader: ImageLoader
 
     private val args by navArgs<DetailFragmentArgs>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentDetailBinding.inflate(inflater, container, false).apply {
-        _binding = this
-    }.root
 
     @Suppress("MagicNumber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,11 +97,6 @@ class DetailFragment : Fragment() {
         TransitionInflater.from(context).inflateTransition(android.R.transition.move).apply {
             sharedElementEnterTransition = this
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

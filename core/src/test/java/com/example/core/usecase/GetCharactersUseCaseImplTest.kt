@@ -1,4 +1,4 @@
-package usecase
+package com.example.core.usecase
 
 import androidx.paging.PagingConfig
 import com.example.core.data.repository.CharactersRepository

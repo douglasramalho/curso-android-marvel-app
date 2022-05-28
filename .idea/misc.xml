@@ -10,10 +10,10 @@
         <entry key="app/src/main/res/drawable/ic_img_loading_error.xml" value="0.14074074074074075" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.12537993920972645" />
-        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.3619791666666667" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2557544757033248" />
         <entry key="app/src/main/res/layout/fragment_characters.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.18" />
         <entry key="app/src/main/res/layout/include_error_view.xml" value="0.1526268115942029" />
         <entry key="app/src/main/res/layout/include_view_characters_error_state.xml" value="0.16" />
         <entry key="app/src/main/res/layout/include_view_characters_loading_state.xml" value="0.2" />

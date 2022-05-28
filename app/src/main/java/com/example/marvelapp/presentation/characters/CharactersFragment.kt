@@ -1,9 +1,7 @@
 package com.example.marvelapp.presentation.characters
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,18 +9,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.example.marvelapp.R
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import com.example.marvelapp.framework.imageloader.ImageLoader
+import com.example.marvelapp.presentation.common.extensions.viewBinding
 import com.example.marvelapp.presentation.detail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CharactersFragment : Fragment() {
+class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
-    private var _binding: FragmentCharactersBinding? = null
-    private val binding: FragmentCharactersBinding get() = _binding!!
+    private val binding by viewBinding(FragmentCharactersBinding::bind)
 
     private val viewModel: CharactersViewModel by viewModels()
 
@@ -45,17 +44,6 @@ class CharactersFragment : Fragment() {
             findNavController().navigate(directions, extras)
         }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentCharactersBinding.inflate(
-        inflater,
-        container,
-        false
-    ).apply {
-        _binding = this
-    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -116,11 +104,6 @@ class CharactersFragment : Fragment() {
                 startShimmer()
             } else stopShimmer()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

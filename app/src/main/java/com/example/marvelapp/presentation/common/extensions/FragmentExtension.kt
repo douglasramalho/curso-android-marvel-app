@@ -1,4 +1,4 @@
-package com.example.marvelapp.presentation.extensions
+package com.example.marvelapp.presentation.common.extensions
 
 import android.widget.Toast
 import androidx.annotation.StringRes
