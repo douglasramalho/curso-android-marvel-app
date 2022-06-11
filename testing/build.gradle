@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    // esse modulo e exclusivo para compartilhar classes de testes.
+    // como esse carinha aqui eh um modulo novo
+    // eu nao vou implementar esses carinhas aqui pra testImplementation
+    //pq esse modulo nao vamos fazer teste unitario
+    // esse modulo eh exclusivo para compartilhar classes de testes.
+    // vamos utilizar o api que vai dizer que essa dependencia vai ficar disponivel pra esse modulo
+    // como tambem pra quem importar esse camarada
+    // apenas o test aqui vai ter conhecimento das classes do core
+    // que nos vamos precisar constantemente
+    implementation "androidx.paging:paging-common:$paging_version"
+    api project(":core")
+    api('junit:junit:4.13.2')
+    api("androidx.arch.core:core-testing:2.1.0")
+    api('org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1')
+    api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+
+    testImplementation project(":testing")
+
+}

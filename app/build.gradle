@@ -60,6 +60,8 @@ android {
 
 dependencies {
     // preciso fazer com que nosso modulo app veja o modulo core
+    // se eu importar eu consigo enxergar todas as dependencias assim como
+    // assim como usar todos os arquivos dentro do modulo
 
     implementation project(':core')
     // AndroidX
@@ -70,6 +72,7 @@ dependencies {
     // Material design
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
 
     // Navigation
     def nav_version = '2.4.0-alpha05'
@@ -107,10 +110,11 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
 
     // Unit tests
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    // importei ele aqui nas dependencias de testes
+    // nao importar ele nas dependencias de producao
+    // pois como ele vai ser usado apenas pra teste
+    // ou seja apenas para a versao de debug
+    testImplementation project(":testing")
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Instrumentation tests

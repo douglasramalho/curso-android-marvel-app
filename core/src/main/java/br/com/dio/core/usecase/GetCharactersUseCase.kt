@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import br.com.dio.core.data.repository.CharactersRepository
 import br.com.dio.core.domain.model.Character
+import br.com.dio.core.usecase.GetCharactersUseCase.GetCharactersParams
 import br.com.dio.core.usecase.base.PagingUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -19,9 +20,20 @@ import javax.inject.Inject
 
 
 // ensinamos o dagger como criar uma instancia desse carinha aqui
-class GetCharactersUseCase @Inject constructor(
-    private val charactersRepository : CharactersRepository
-) : PagingUseCase<GetCharactersUseCase.GetCharactersParams, Character>() {
+
+interface GetCharactersUseCase {
+    operator fun invoke(params: GetCharactersParams): Flow<PagingData<Character>>
+
+    data class GetCharactersParams(val query: String, val pagingConfig: PagingConfig)
+
+}
+// temos que ensinar o dagger hilt como injetar uma implementacao desse carinha aqui GetCharactersUseCaseImp
+
+
+class GetCharactersUseCaseImp @Inject constructor(
+    private val charactersRepository: CharactersRepository
+) : PagingUseCase<GetCharactersParams, Character>(),
+    GetCharactersUseCase {
     // aqui no meu GetCharactersUseCase eu vou receber um pagingConfig implementado
     // que representa esse pager, esses sao os parametros que meu viewModel tem que passar
     // nao preciso converter o personagem que eh da camada de domain para um objeto da camada de view
@@ -36,9 +48,23 @@ class GetCharactersUseCase @Inject constructor(
     // for utilizar
 
     override fun createFlowObservable(params: GetCharactersParams): Flow<PagingData<Character>> {
+        // ele esta so instanciando o pager e retornando um flow desse pager
+        // se eu colocar um breakPoint charactersRepository.getCharacters(params.query)
+        // nao vamos conseguir entrar nessa linha de codigo
+        // pq essa linha de codigo esta dentro desse lambda
+        // no momento que meu pager for criado
+        // e for pegar os characters do nosso repository
+        // esse carinha aqui charactersRepository.getCharacters(params.query) vai retornar null
+        // pq nao fornecemos nenhum retorno em nosso teste
+        // pq a instancia do nosso repository feita pelo mock
+        // e vazia @Mock
+        val pagingSource = charactersRepository.getCharacters(params.query)
         // deixei ela como astrata pra forcar quem esta implementando essa funcao a definir como ela
-        return Pager(config = params.pagingConfig){ // abro essa funcao anonima ou bloco
-            charactersRepository.getCharacters(params.query)
+        return Pager(config = params.pagingConfig) {  // abro essa funcao anonima ou bloco
+            // ele sempre cria uma instancia nova de pager e isso eh um problema pros testes
+            // toda vida ele cria uma instancia quando passa pelo flow e retorna essa nova instancia
+//            charactersRepository.getCharacters(params.query)
+            pagingSource
             // sabemos que o getCharacters retorna um pagingSource
             // dentro aqui do nosso Pager ele espera que seja passado aqui um carinha
             // do tipo Paging Source
@@ -54,7 +80,7 @@ class GetCharactersUseCase @Inject constructor(
 
     }
 
-    data class GetCharactersParams(val query: String, val pagingConfig: PagingConfig)
+//    data class GetCharactersParams(val query: String, val pagingConfig: PagingConfig)
 
     // na arquitetura do paging 3 vemos que precisamos na camada do viewModel
     // ter um Pager

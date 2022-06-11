@@ -27,6 +27,10 @@ import javax.inject.Inject
 // ou seja esse @HiltViewModel vai substituir aquele factory pra gente
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
+    // aqui vamos fazer a nossa primeira melhoria de codigo
+    // refatorar ele pra tornar ele mais seguro, mais eficiente.
+    // fazendo com que o meu viewModel nao dependa de uma implementacao
+    // e sim de uma interface
     private val getCharactersUseCase: GetCharactersUseCase
     // se minha tela(activity ou fragment) de personagens precisar fazer outra coisa
     // alem de obter personagens eu simplesmente comeco a receber casos de uso.

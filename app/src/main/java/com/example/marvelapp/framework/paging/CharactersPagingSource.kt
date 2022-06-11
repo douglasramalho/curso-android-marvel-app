@@ -12,6 +12,11 @@ import com.example.marvelapp.framework.network.response.toCharacterModel
 // e o value vou passar o nosso tipo Character
 // query nome de um personagem que o usuario pode digitar na camada de ui para jogar pra ca onde
 // poderemos filtrar
+// nao vou testar o nosso repository
+// e nem o nosso data source
+// pq o que eles fazem e apenas retornar
+// uma linha de codigo
+// e eu nao quero perder meu tempo testando apenas uma linha de codigo
 class CharactersPagingSource(
     private val remoteDateSource: CharactersRemoteDataSource<DataWrapperResponse>,
     private val query: String
@@ -55,13 +60,15 @@ class CharactersPagingSource(
             // se ele fizer a request e nao estourar nenhum erro aqui
 
             LoadResult.Page(
-                data = response.data.results.map { characterResponse ->
+                // ele vai pegar o response.results.map
+                // e vai transformar no nosso modelo
+                data = response.data.results.map { it.toCharacterModel()
                     // usei o map para converter de CharacterResponse para
                     // quando eu faco o map aqui eu estou percorrendo todos os meus resultados aqui
                     // fizemos a conversao do objeto de response para o nosso objeto de domain
                     // e estamos aqui retornando no parametro data o tipo correto o tipo esperado
 
-                    characterResponse.toCharacterModel()
+
                 },
                 // como nao vamos estar trabalhando na posicao inversa
                 //  vamos estar solicitando dados apartir da ultima posicao da lista
@@ -78,6 +85,8 @@ class CharactersPagingSource(
                 // request desnecessarias
                 // sabemos que estamos obtendo personagens de 20 em 20
                 prevKey = null,
+                // no nosso teste eu quero validar, se o next key eh igual 20
+                // como tambem se o data tem 2 resultados
                 nextKey = if (responseOffset < totalCharacters) {
                     responseOffset + LIMIT
                 } else null
