@@ -29,7 +29,7 @@
     <!-- Ordering -->
     <string name="sort_order_by">Order by</string>
     <string name="sort_order_by_name">Name</string>
-    <string name="sort_order_by_modified">Modificado</string>
+    <string name="sort_order_by_modified">Modified</string>
     <string name="sort_order">Order</string>
     <string name="sort_order_ascending">Ascending</string>
     <string name="sort_order_descending">Descending</string>
