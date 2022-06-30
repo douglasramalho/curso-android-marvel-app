@@ -18,8 +18,28 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
+
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
+
+    signingConfigs {
+        release {
+            // colocar de forma escondida
+            // essas info geralmente nao ficam aqui dentro do nosso projeto
+            // e se coloca dentro do nosso projeto
+            // ele vao fazer uma estrategia para esconder, essas informacoes
+            // apikey.properties so que no caso seria store.properties
+            // e recuperar as informacoes desse arquivo
+            // e preencher as informacoes de password
+
+
+            storeFile file('/home/hianuypinto/AndroidStudioProjects/curso-android-marvel-app/store/marvel_app_key_store')
+            storePassword 'marvel@123'
+            keyAlias 'marvel-app'
+            keyPassword 'marvel@123'
+        }
+    }
+
 
     defaultConfig {
         applicationId "com.example.marvelapp"
@@ -37,11 +57,88 @@ android {
         // e nos temos acesso a esse arquivo em toda nossa aplicacao
         // nao consigo visualizar qual que e minha chave publica e qual que eh minha chave privada
     }
-
     buildTypes {
+        // aplicacao android profissional
+        // 3 tipos de build pelo menos
+        // quando criamos um projeto no Android studio ele automaticamente cria isso
+        // implicitamente ele cria o build type de debug, esta escondido aqui
+        // vamos criar 3 tipos de build, para testar o nosso app com mais confianca e seguranca antes
+        // de mandar pra prod
+        // eu coloquei um applicationIdSuffix, para que nao fique sobrescrevendo toda vida que eu
+        // instalar uma instancia do aplicativo.
+        // Assim ele vai criar instancia para cada modo de desenvolvimento
+
+        debug {
+            applicationIdSuffix '.debug'
+            debuggable = true
+            // nao habilitar minifyEnabled, pq debug,
+            // debug nao tem a minifyEnabled habilitado apenas no release
+            // ai vc testa seu aplicativo, desenvolve seu aplicativo, ele funciona no build type
+            // de debug
+            // vc acha que esta correndo bem a mil maravilhas
+        }
+        staging {
+            initWith debug
+            // ele vai pegar as confi do modo debug
+            // vai sobrescrever apenas o  applicationIdSuffix '.staging'
+
+            // versao pre prod
+            // testada antes de ir pra prod
+            //vai imitar o build type de release para os nossos testadores, equipe de QA
+            // testa a versao do aplicativo, parecido com a versao de prod antes mesmo de nos
+            // enviarmos o nosso aplicativo pra prod
+            // isso pq?
+            // vamos garantir que tudo o que for testado aqui, tambem funcionara no build type de
+            // release, pq temos as mesmas configuracoes
+            // apenas a parte da ofuscacao que pode trazer problema pro seu app.
+            // a ofuscacao pode trazer problema, pq como estamos usando o gson para fazer o parse
+            // da nossa api data wrapper response como nao definimos nenhuma regra do pro guard
+            // e nos habilitamos a ofuscacao, todas as classes de modelos que o retrofit utiliza
+            // estao sendo ofuscadas, por exemplo o DataWrapperResponse, pode ficar sendo A ou B
+            // o Gson trabalha com reflection e em tempo de execucao, quando ele vai fazer o parse
+            // dos dados que estao vindo da nossa api, ele vai tentar encontrar o seguinte,
+            // eu quero tentar encontrar uma classe que DataWrapperResponse, copyright e data
+            // pra poder fazer esse parse, pra poder fazer essa conversao do gson para uma classe
+            // Kotlin, so que como esse copyright agora o nome dele eh A o gson nao esta
+            // conseguindo encontrar o nome desses atributos, pois eles estao all estranho.
+            // por isso o nosso app, nao esta conseguindo ler os dados corretamente
+            // nao conseguiamos enxergar o characterResponse, pois ele estava ofuscado
+            // eh necessario, aplicar a ofuscacao na build de release
+            // se uma pessoa com acesso root do telefone, instalar seu aplicativo
+            // essa pessoa vai conseguir fazer o dump da memoria, conseguir verificar o que tem
+            // na memoria, verificar quais os nomes que estao usando para suas classes
+            // e conseguir ver quais os nomes das funcoes
+            // todos os aplicativos, variante que sao debugaveis, o proprio android studio
+            // cria uma chave insegura, produção
+
+            minifyEnabled true
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+                    'proguard-rules-staging.pro'
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            // assinamos o aplicativo.
+            // de release com a chave que configuramos
+//            signingConfigs signingConfigs.release
+            // habilitou a ofuscacao, o app esta menor, tambem nao sofrera de engenharia reversa
+            // nao entregar um aplicacao em prod, com a ofuscacao habilitada sem testar, essa aplicacao
+            // quando ela esta com esse modo ativado
+            minifyEnabled true
+//            shrikResources true
+            // todos os aplicativos ou variantes que sao debugaveis o proprio android studio cria
+            // uma chave de assinatura de debug que eh uma chave insegura, nao deve ser utilizada
+            // em producao, essa chave fica armazenada pelo proprio android studio, ele assina nossos
+            // aplicativos, automaticamente, quando clicamos em executar o aplicativo
+            // se eu mudar pro build type de release eu nao consigo executar esse app aqui
+            // pelo android studio
+            // temos que criar uma chave de assinatura
+            // vamos criar pelo proprio android studio
+            // reduzir o tamanho do app, com base em recursos que nao sao usados. Drawables
+            // precisamos criar uma assinatura
+//            shrikResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
