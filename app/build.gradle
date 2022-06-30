@@ -8,6 +8,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
 
+
 // ele vai buscar esse arquivo
 // estou voltando uma pasta pra tras
 // estou saindo da pasta app
