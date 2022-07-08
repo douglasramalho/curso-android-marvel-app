@@ -8,14 +8,15 @@ java {
 
 dependencies {
     def masterTestDependencies = rootProject.ext.masterTestDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
 
     implementation project(rootProject.ext.modules.core)
 
-    api masterTestDependencies.junitVersion
-    api masterTestDependencies.coreTestingVersion
     api masterTestDependencies.kotlinxCoroutinesTest
+    api masterTestDependencies.coreTestingVersion
     api masterTestDependencies.mockitoVersion
+    api masterTestDependencies.junitVersion
 
     //Paging3 Common
-    implementation "androidx.paging:paging-common:$paging_version"
+    implementation commonDependencies.pagingCommon
 }

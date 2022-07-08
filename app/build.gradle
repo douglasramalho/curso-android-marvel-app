@@ -4,11 +4,17 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
-apply from: '../config/detekt/detekt.gradle'
+apply plugin: 'com.google.firebase.crashlytics'
+
+apply from: "$rootDir/config/detekt/detekt.gradle"
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+def storeKeyPropertiesFile = rootProject.file("storekey.properties")
+def storeKeyProperties = new Properties()
+storeKeyProperties.load(new FileInputStream(storeKeyPropertiesFile))
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -16,17 +22,17 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/Walcker/ANDROIDSTUDIO/Vitor/curso-android-marvel-app/store/app_key_marvel_store')
-            storePassword 'walcker178977'
-            keyAlias 'marvel_app'
-            keyPassword 'walcker178977'
+            storeFile file(storeKeyProperties['FILE_KEY'])
+            storePassword storeKeyProperties['STORE_KEY']
+            keyAlias storeKeyProperties['ALIAS_KEY']
+            keyPassword storeKeyProperties['STORE_KEY']
         }
     }
 
     defaultConfig {
-        applicationId rootProject.ext.applicationId
-        minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        applicationId rootProject.ext.applicationId
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
@@ -77,20 +83,22 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-measurement-api:21.0.0'
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
     def presentationDependencies = rootProject.ext.presentationDependencies
     def masterTestDependencies = rootProject.ext.masterTestDependencies
     def masterDependencies = rootProject.ext.masterDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
     def dataDependencies = rootProject.ext.dataDependencies
 
     implementation project(rootProject.ext.modules.core)
 
     //Android
+    implementation masterDependencies.coroutines_android
     implementation masterDependencies.constraintlayout
     implementation masterDependencies.androidCoreKtx
     implementation masterDependencies.legacySupport
     implementation masterDependencies.appcompat
-    implementation masterDependencies.coroutines_android
 
     kapt(dataDependencies.roomCompiler) {
         exclude group: 'com.intellij', module: 'annotations'
@@ -110,11 +118,16 @@ dependencies {
     implementation presentationDependencies.shimmer
     kapt presentationDependencies.glideCompiler
 
-    implementation "com.google.firebase:firebase-config:21.1.0"
+    //Firebase
+    implementation platform(commonDependencies.firebaseBom)
+    implementation commonDependencies.firebaseCrashlytics
+    implementation commonDependencies.firebaseAnalytics
+    implementation commonDependencies.firebaseDisplay
+    implementation commonDependencies.firebaseConfig
 
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation presentationDependencies.paging
+    implementation masterDependencies.hiltAndroid
+    kapt masterDependencies.hiltCompiler
 
     // Tests
     androidTestImplementation presentationTestDependencies.espressoContrib
@@ -124,11 +137,10 @@ dependencies {
     androidTestUtil presentationTestDependencies.orchestrator
     testImplementation project(":testing")
 
+    androidTestImplementation masterTestDependencies.kotlinxCoroutinesTest
     androidTestImplementation masterTestDependencies.junitTestVersion
     androidTestImplementation masterTestDependencies.runnerTest
+    androidTestImplementation masterTestDependencies.hiltTest
+    kaptAndroidTest masterTestDependencies.hiltTestCompiler
     implementation masterTestDependencies.roomTesting
-
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
-    androidTestImplementation masterTestDependencies.kotlinxCoroutinesTest
 }

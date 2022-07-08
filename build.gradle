@@ -1,25 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    apply from: 'tools/dependencies.gradle'
-
-    ext {
-        kotlin_version = "1.5.20"
-        nav_version = "2.3.4"
-        hilt_version = '2.41'
-        detekt_version = '1.19.0'
-        paging_version = '3.1.1'
-    }
+    apply from: "$rootDir/tools/dependencies.gradle"
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        def dependencies = rootProject.ext.masterDependencies
-        classpath dependencies.gradleVersion
-        classpath dependencies.kotlinGradleVersion
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        def commonDependencies = rootProject.ext.commonDependencies
+        def masterDependencies = rootProject.ext.masterDependencies
+
+        classpath masterDependencies.gradleVersion
+        classpath masterDependencies.kotlinGradleVersion
+        classpath masterDependencies.navArgs
+        classpath masterDependencies.hilt
+        classpath masterDependencies.hiltGradle
+        classpath masterDependencies.googleServices
+        classpath commonDependencies.firebasePlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -27,7 +24,7 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("$detekt_version")
+    id("io.gitlab.arturbosch.detekt").version("$detekt")
 }
 
 allprojects {

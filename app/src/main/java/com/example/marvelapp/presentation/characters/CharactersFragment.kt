@@ -27,6 +27,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+    
     private val characterAdapter: CharacterAdapter by lazy {
         CharacterAdapter(imageLoader) { character, view ->
             val extras = FragmentNavigatorExtras(

@@ -9,9 +9,9 @@ java {
 dependencies{
     def commonDependencies = rootProject.ext.commonDependencies
 
+    api(commonDependencies.okhttp3Interceptor)
     api(platform(commonDependencies.okhttp3))
     api(commonDependencies.okhttp3Ok)
-    api(commonDependencies.okhttp3Interceptor)
 
     implementation commonDependencies.javaxDep
     api commonDependencies.retrofitConverter
@@ -20,7 +20,7 @@ dependencies{
     api commonDependencies.gson
 
     //Paging3 Common
-    implementation "androidx.paging:paging-common:$paging_version"
+    implementation commonDependencies.pagingCommon
 
     testImplementation project(rootProject.ext.modules.testing)
 }

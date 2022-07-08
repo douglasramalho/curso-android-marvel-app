@@ -1,48 +1,55 @@
 ext{
-    applicationId = "com.example.marvelapp"
-    versionCode = 1
-    versionName = "1.0.0"
-    javaVersion = JavaVersion.VERSION_1_8
-    buildToolsVersion = "30.0.3"
+    applicationId                      = "com.example.marvelapp"
+    versionCode                        = 1
+    versionName                        = "1.0.0"
+    javaVersion                        = JavaVersion.VERSION_1_8
+    buildToolsVersion                  = "30.0.3"
 
     // Android
-    androidMinSdkVersion = 23
-    androidTargetSdkVersion = 31
-    androidCompileSdkVersion = 31
-    androidConstraintLayoutVersion = "2.1.3"
-    androidAppCompatVersion = "1.4.1"
-    androidCoreKtxVersion = "1.7.0"
-    materialVersion = "1.5.0"
-    legacyVersion = "1.0.0"
-    roomVersion = "2.4.2"
-    gradleVersion = "7.0.0"
+    androidMinSdkVersion               = 23
+    androidTargetSdkVersion            = 31
+    androidCompileSdkVersion           = 31
+    androidConstraintLayoutVersion     = "2.1.3"
+    androidAppCompatVersion            = "1.4.1"
+    androidCoreKtxVersion              = "1.7.0"
+    materialVersion                    = "1.5.0"
+    legacyVersion                      = "1.0.0"
+    roomVersion                        = "2.4.2"
+    gradleVersion                      = "7.0.0"
 
     //Kotlin
-    kotlinGradleVersion = "1.6.10"
-    kotlinxCoroutines = "1.6.0"
+    kotlinGradleVersion                = "1.6.10"
+    kotlinxCoroutines                  = "1.6.0"
 
     //Libs
-    datastoreVersion  = "1.0.0"
-    lifecycleVersion = "2.4.1"
-    shimmerVersion = "0.5.0"
-    glideVersion  = "4.13.1"
-    navVersion = "2.4.1"
-    javaxVersion = "1"
-    gsonVersion = "2.9.0"
-    retrofitVersion = "2.9.0"
+    datastoreVersion                   = "1.0.0"
+    lifecycleVersion                   = "2.4.1"
+    shimmerVersion                     = "0.5.0"
+    glideVersion                       = "4.13.1"
+    navVersion                         = "2.4.1"
+    javaxVersion                       = "1"
+    gsonVersion                        = "2.9.0"
+    retrofitVersion                    = "2.9.0"
+    firebase                           = "30.1.0"
+    firebasePlugin                     = "2.9.1"
+    googleServices                     = "4.3.10"
+    hilt                               = "2.41"
+    navigation                         = "2.3.4"
+    detekt                             = "1.19.0"
+    paging                             = "3.1.1"
 
     //Tests
-    customTestRunner = "com.example.marvelapp.CustomTestRunner"
-    mockWebServerVersion = "4.9.3"
-    orchestratorVersion = "1.4.1"
-    espressoVersion = "3.3.0"
-    fragmentVersion = "1.4.1"
-    runnerVersion = "1.4.0"
-    junitTestVersion = "1.1.3"
-    junitVersion = "4.13.2"
-    okhttp3Version = "4.9.0"
-    coreTestingVersion = "2.1.0"
-    mockitoVersion = "2.2.0"
+    customTestRunner                   = "com.example.marvelapp.CustomTestRunner"
+    mockWebServerVersion               = "4.9.3"
+    orchestratorVersion                = "1.4.1"
+    espressoVersion                    = "3.3.0"
+    fragmentVersion                    = "1.4.1"
+    runnerVersion                      = "1.4.0"
+    junitTestVersion                   = "1.1.3"
+    junitVersion                       = "4.13.2"
+    okhttp3Version                     = "4.9.0"
+    coreTestingVersion                 = "2.1.0"
+    mockitoVersion                     = "2.2.0"
 
     modules = [
             core                 : ":core",
@@ -56,7 +63,13 @@ ext{
             legacySupport        : "androidx.legacy:legacy-support-v4:$legacyVersion",
             androidCoreKtx       : "androidx.core:core-ktx:$androidCoreKtxVersion",
             gradleVersion        : "com.android.tools.build:gradle:$gradleVersion",
-            kotlinGradleVersion  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradleVersion"
+            kotlinGradleVersion  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradleVersion",
+            googleServices       : "com.google.gms:google-services:$googleServices",
+            navArgs              : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation",
+            hiltGradle           : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",
+            hilt                 : "com.google.dagger:hilt-android-gradle-plugin:$hilt",
+            hiltCompiler         : "com.google.dagger:hilt-android-compiler:$hilt",
+            hiltAndroid          : "com.google.dagger:hilt-android:$hilt"
     ]
 
     commonDependencies = [
@@ -67,17 +80,26 @@ ext{
             retrofitConverter    : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
             okhttp3              : "com.squareup.okhttp3:okhttp-bom:$okhttp3Version",
             okhttp3Ok            : "com.squareup.okhttp3:okhttp",
-            okhttp3Interceptor   : "com.squareup.okhttp3:logging-interceptor"
+            okhttp3Interceptor   : "com.squareup.okhttp3:logging-interceptor",
+            firebaseBom          : "com.google.firebase:firebase-bom:$firebase",
+            firebaseAnalytics    : "com.google.firebase:firebase-analytics-ktx",
+            firebaseCrashlytics  : "com.google.firebase:firebase-crashlytics-ktx",
+            firebaseConfig       : "com.google.firebase:firebase-config-ktx",
+            firebaseDisplay      : "com.google.firebase:firebase-inappmessaging-display-ktx",
+            firebasePlugin       : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",
+            pagingCommon         : "androidx.paging:paging-common:$paging"
     ]
 
     masterTestDependencies = [
             roomTesting          : "androidx.room:room-testing:$roomVersion",
-            junitTestVersion      : "androidx.test.ext:junit:$junitTestVersion",
+            junitTestVersion     : "androidx.test.ext:junit:$junitTestVersion",
             runnerTest           : "androidx.test:runner:$runnerVersion",
             junitVersion         : "junit:junit:$junitVersion",
             coreTestingVersion   : "androidx.arch.core:core-testing:$coreTestingVersion",
             kotlinxCoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutines",
-            mockitoVersion       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion"
+            mockitoVersion       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion",
+            hiltTest             : "com.google.dagger:hilt-android-testing:$hilt",
+            hiltTestCompiler     : "com.google.dagger:hilt-android-compiler:$hilt",
     ]
 
     presentationDependencies = [
@@ -91,6 +113,7 @@ ext{
             glideCompiler        : "com.github.bumptech.glide:compiler:$glideVersion",
             glideGlide           : "com.github.bumptech.glide:glide:$glideVersion",
             shimmer              : "com.facebook.shimmer:shimmer:$shimmerVersion",
+            paging              : "androidx.paging:paging-runtime-ktx:$paging",
     ]
 
     presentationTestDependencies = [
