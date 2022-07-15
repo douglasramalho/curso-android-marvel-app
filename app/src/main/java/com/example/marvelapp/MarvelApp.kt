@@ -2,6 +2,7 @@ package com.example.marvelapp
 
 import android.app.Application
 import dagger.hilt.EntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
-@EntryPoint
+@HiltAndroidApp
 class MarvelApp: Application()

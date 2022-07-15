@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/55119/AndroidStudioProjects/Projetos Pessoais/curso-android-marvel-app/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/55119/AndroidStudioProjects/Projetos Pessoais/curso-android-marvel-app/app/src/main/res/layout/fragment_about.xml" value="0.25" />
+        <entry key="..\:/Users/55119/AndroidStudioProjects/Projetos Pessoais/curso-android-marvel-app/app/src/main/res/layout/fragment_characters.xml" value="0.25" />
+        <entry key="..\:/Users/55119/AndroidStudioProjects/Projetos Pessoais/curso-android-marvel-app/app/src/main/res/layout/fragment_favorites.xml" value="0.25" />
+        <entry key="..\:/Users/55119/AndroidStudioProjects/Projetos Pessoais/curso-android-marvel-app/app/src/main/res/menu/app_menu_items.xml" value="0.25" />
       </map>
     </option>
   </component>
