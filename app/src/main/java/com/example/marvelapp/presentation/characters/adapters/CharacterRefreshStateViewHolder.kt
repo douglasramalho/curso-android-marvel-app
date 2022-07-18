@@ -1,4 +1,4 @@
-package com.example.marvelapp.presentation.characters
+package com.example.marvelapp.presentation.characters.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,15 +6,16 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelapp.databinding.ItemCharacterLoadMoreStateBinding
+import com.example.marvelapp.databinding.ItemCharacterRefreshStateBinding
 
-class CharacterLoadMoreStateViewHolder(
-    itemBinding: ItemCharacterLoadMoreStateBinding,
+class CharacterRefreshStateViewHolder(
+    itemBinding: ItemCharacterRefreshStateBinding,
     retry: () -> Unit
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-    private val binding = ItemCharacterLoadMoreStateBinding.bind(itemView)
-    private val progressBarLoadMore = binding.progressLoadMore
-    private val textTryingAgainMessage = binding.textTryingAgain.also {
+    private val binding = ItemCharacterRefreshStateBinding.bind(itemView)
+    private val progressBarLoadMore = binding.progressLoadingMore
+    private val textTryingAgainMessage = binding.textTryAgain.also {
         it.setOnClickListener {
             retry()
         }
@@ -26,10 +27,10 @@ class CharacterLoadMoreStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): CharacterLoadMoreStateViewHolder {
-            val itemBinding = ItemCharacterLoadMoreStateBinding
+        fun create(parent: ViewGroup, retry: () -> Unit): CharacterRefreshStateViewHolder {
+            val itemBinding = ItemCharacterRefreshStateBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
-            return CharacterLoadMoreStateViewHolder(itemBinding, retry)
+            return CharacterRefreshStateViewHolder(itemBinding, retry)
         }
     }
 }

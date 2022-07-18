@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -21,6 +22,7 @@ object NetworkModule {
 
     private const val TIMEOUT_SECONDS = 15L
 
+    @Singleton
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
@@ -32,6 +34,7 @@ object NetworkModule {
         }
     }
 
+    @Singleton
     @Provides
     fun provideAuthorizationInterceptor(): AuthorizationInterceptor{
         return AuthorizationInterceptor(
@@ -41,6 +44,7 @@ object NetworkModule {
         )
     }
 
+    @Singleton
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
@@ -54,11 +58,13 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory{
         return GsonConverterFactory.create()
     }
 
+    @Singleton
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,

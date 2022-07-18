@@ -10,6 +10,8 @@
     <string name="error_remove_favorite">Error when trying to remove favorite</string>
     <string name="error_check_favorite">Error when trying to check if is favorite</string>
 
+    <string name="common_offline_try_again">You are offline. Check your internet connection and try again</string>
+
     <!-- App Menu -->
     <string name="app_menu_heroes">Heroes</string>
     <string name="app_menu_favorites">Favorites</string>
@@ -29,7 +31,7 @@
     <!-- Ordering -->
     <string name="sort_order_by">Order by</string>
     <string name="sort_order_by_name">Name</string>
-    <string name="sort_order_by_modified">Modificado</string>
+    <string name="sort_order_by_modified">Modified</string>
     <string name="sort_order">Order</string>
     <string name="sort_order_ascending">Ascending</string>
     <string name="sort_order_descending">Descending</string>

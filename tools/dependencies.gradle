@@ -32,7 +32,7 @@ ext{
     retrofitVersion                    = "2.9.0"
     firebase                           = "30.1.0"
     firebasePlugin                     = "2.9.1"
-    googleServices                     = "4.3.10"
+    googleServices                     = "4.3.8"
     hilt                               = "2.41"
     navigation                         = "2.3.4"
     detekt                             = "1.19.0"
@@ -84,6 +84,7 @@ ext{
             firebaseBom          : "com.google.firebase:firebase-bom:$firebase",
             firebaseAnalytics    : "com.google.firebase:firebase-analytics-ktx",
             firebaseCrashlytics  : "com.google.firebase:firebase-crashlytics-ktx",
+            firebaseCore         : "com.google.firebase:firebase-core:11.6.2",
             firebaseConfig       : "com.google.firebase:firebase-config-ktx",
             firebaseDisplay      : "com.google.firebase:firebase-inappmessaging-display-ktx",
             firebasePlugin       : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",
@@ -128,6 +129,7 @@ ext{
             roomCompiler         : "androidx.room:room-compiler:$roomVersion",
             roomRuntime          : "androidx.room:room-runtime:$roomVersion",
             roomKtx              : "androidx.room:room-ktx:$roomVersion",
+            roomPaging           : "androidx.room:room-paging:$roomVersion",
     ]
 
     dataTestDependencies = [

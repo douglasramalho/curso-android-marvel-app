@@ -19,4 +19,8 @@
     <color name="unchecked_chip">@color/medium_grey</color>
     <color name="checked_chip_text">@color/red_800</color>
     <color name="unchecked_chip_text">@color/black</color>
+    <color name="checked_button">#203A3A3A</color>
+    <color name="unchecked_button">@color/purple_700</color>
+    <color name="checked_button_text">@color/teal_700</color>
+    <color name="unchecked_button_text">@color/white</color>
 </resources>

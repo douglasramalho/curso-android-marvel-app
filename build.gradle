@@ -25,6 +25,7 @@ buildscript {
 
 plugins {
     id("io.gitlab.arturbosch.detekt").version("$detekt")
+    id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
 }
 
 allprojects {
