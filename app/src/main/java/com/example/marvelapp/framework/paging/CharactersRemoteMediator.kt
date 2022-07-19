@@ -23,6 +23,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class CharactersRemoteMediator @Inject constructor(
     private val query: String,
+    private val orderBy: String,
     private val database: AppDatabase,
     private val remoteDataSource: CharactersRemoteDataSource
 ) : RemoteMediator<Int, CharacterEntity>() {
@@ -57,6 +58,9 @@ class CharactersRemoteMediator @Inject constructor(
             )
             if (query.isNotEmpty()) {
                 queries["nameStartsWith"] = query
+            }
+            if (orderBy.isNotEmpty()) {
+                queries["orderBy"] = orderBy
             }
             val characterPaging = remoteDataSource.fetchCharacter(queries)
             val responseOffset = characterPaging.offset
