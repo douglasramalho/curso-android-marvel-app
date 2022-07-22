@@ -205,6 +205,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
 
+
     // Other Libs
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
