@@ -14,6 +14,7 @@ interface CharactersRepository {
 
     fun getCachedCharacters(
         query: String,
+        orderBy: String,
         pagingConfig: PagingConfig
     ): Flow<PagingData<Character>>
 
