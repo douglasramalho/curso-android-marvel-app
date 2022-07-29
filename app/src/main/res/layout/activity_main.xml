@@ -9,6 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_app"
         android:layout_width="0dp"
+        android:theme="@style/Marvel.Toolbar"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"

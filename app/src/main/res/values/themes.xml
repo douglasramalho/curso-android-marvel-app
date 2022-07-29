@@ -16,6 +16,13 @@
         <item name="buttonStyle">@style/MarvelButton</item>
     </style>
 
+    <style name="Marvel.Toolbar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
     <style name="MarvelChip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/marvel_chip_background_color</item>
         <item name="android:textColor">@color/marvel_chip_text_color</item>
