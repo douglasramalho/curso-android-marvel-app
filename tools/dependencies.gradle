@@ -101,6 +101,7 @@ ext{
             mockitoVersion       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion",
             hiltTest             : "com.google.dagger:hilt-android-testing:$hilt",
             hiltTestCompiler     : "com.google.dagger:hilt-android-compiler:$hilt",
+            navigationTest       : "androidx.navigation:navigation-testing:$navigation"
     ]
 
     presentationDependencies = [

@@ -141,9 +141,11 @@ dependencies {
 
     androidTestImplementation masterTestDependencies.kotlinxCoroutinesTest
     androidTestImplementation masterTestDependencies.junitTestVersion
+    androidTestImplementation masterTestDependencies.navigationTest
     androidTestImplementation masterTestDependencies.runnerTest
     androidTestImplementation masterTestDependencies.hiltTest
     kaptAndroidTest masterTestDependencies.hiltTestCompiler
     implementation masterTestDependencies.roomTesting
+
 }
 apply plugin: 'com.google.gms.google-services'
