@@ -153,4 +153,5 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
 
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 }
