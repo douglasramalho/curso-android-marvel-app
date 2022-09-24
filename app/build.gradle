@@ -17,15 +17,15 @@ def storeKeyProperties = new Properties()
 storeKeyProperties.load(new FileInputStream(storeKeyPropertiesFile))
 
 android {
-    compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
 
     signingConfigs {
         release {
-            storeFile file(storeKeyProperties['FILE_KEY'])
-            storePassword storeKeyProperties['STORE_KEY']
-            keyAlias storeKeyProperties['ALIAS_KEY']
-            keyPassword storeKeyProperties['STORE_KEY']
+            storeFile file('/Users/vitorwalcker/Developer/marvel-app-hilt/store/marvel_key_store_apk')
+            storePassword 'walcker178977'
+            keyAlias 'marvel-app'
+            keyPassword 'walcker178977'
         }
     }
 
