@@ -12,10 +12,6 @@ def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
-def storeKeyPropertiesFile = rootProject.file("storekey.properties")
-def storeKeyProperties = new Properties()
-storeKeyProperties.load(new FileInputStream(storeKeyPropertiesFile))
-
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
