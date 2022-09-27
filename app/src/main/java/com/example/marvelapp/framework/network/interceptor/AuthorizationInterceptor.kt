@@ -11,6 +11,7 @@ class AuthorizationInterceptor(
     private val privateKey: String,
     private val calendar: Calendar
 ) : Interceptor {
+
     @Suppress("MagicNumber")
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -39,7 +40,7 @@ class AuthorizationInterceptor(
 
     companion object {
         private const val QUERY_PARAMETER_TS = "ts"
-        private const val QUERY_PARAMETER_API_KEY = "apiKey"
+        private const val QUERY_PARAMETER_API_KEY = "apikey"
         private const val QUERY_PARAMETER_HASH = "hash"
     }
 }

@@ -5,14 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.marvelapp.databinding.FragmentCharacteresBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharacteresFragment : Fragment() {
 
     private var _binding: FragmentCharacteresBinding? = null
     private val binding: FragmentCharacteresBinding get() = _binding!!
+
+    private val viewModel: CharactersViewModel by viewModels()
 
     private val characterAdapter = CharactersAdapter()
 
@@ -31,6 +37,12 @@ class CharacteresFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
+
+        lifecycleScope.launch {
+            viewModel.charactersPageData(query = "").collect { pagingData ->
+                characterAdapter.submitData(pagingData)
+            }
+        }
     }
 
     private fun initCharactersAdapter() {
