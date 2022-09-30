@@ -17,6 +17,15 @@ android {
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
+    signingConfigs {
+        release {
+            storeFile file("$rootDir\\store\\marvel_app_key_store.jks")
+            storePassword "marvel@123"
+            keyPassword "marvel@123"
+            keyAlias "marvel-app"
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.marvelapp"
         minSdkVersion 23
@@ -28,12 +37,26 @@ android {
 
         buildConfigField "String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY']
         buildConfigField "String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY']
-        buildConfigField "String", "BASE_URL", apikeyProperties['BASE_URL']
+        buildConfigField "String", "BASE_URL", "https://gateway.marvel.com:443/v1/public/"
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.debug'
+            debuggable true
+        }
+        staging {
+            applicationIdSuffix '.staging'
+            initWith debug
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+                    'proguard-rules-staging.pro'
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
