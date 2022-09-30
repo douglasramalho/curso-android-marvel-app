@@ -14,3 +14,5 @@
 .cxx
 local.properties
 apikey.properties
+store.properties
+/store
