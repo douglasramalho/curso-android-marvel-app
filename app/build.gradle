@@ -100,7 +100,6 @@ dependencies {
 
     // Other Libs
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
 
     // Unit tests
