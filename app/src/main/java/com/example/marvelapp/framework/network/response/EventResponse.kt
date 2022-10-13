@@ -1,6 +1,5 @@
 package com.example.marvelapp.framework.network.response
 
-import com.example.core.domain.model.Comic
 import com.example.core.domain.model.Event
 import com.google.gson.annotations.SerializedName
 

@@ -14,7 +14,7 @@ ext{
     androidCoreKtxVersion              = "1.7.0"
     materialVersion                    = "1.5.0"
     legacyVersion                      = "1.0.0"
-    roomVersion                        = "2.4.2"
+    roomVersion                        = "2.4.3"
     gradleVersion                      = "7.0.0"
 
     //Kotlin
