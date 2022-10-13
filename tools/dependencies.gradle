@@ -3,47 +3,48 @@ ext{
     versionCode                        = 1
     versionName                        = "1.0.0"
     javaVersion                        = JavaVersion.VERSION_11
-    buildToolsVersion                  = "30.0.3"
 
     // Android
     androidMinSdkVersion               = 23
-    androidTargetSdkVersion            = 31
-    androidCompileSdkVersion           = 31
-    androidConstraintLayoutVersion     = "2.1.3"
-    androidAppCompatVersion            = "1.4.1"
-    androidCoreKtxVersion              = "1.7.0"
-    materialVersion                    = "1.5.0"
+    androidTargetSdkVersion            = 33
+    androidCompileSdkVersion           = 33
+    androidConstraintLayoutVersion     = "2.1.4"
+    androidAppCompatVersion            = "1.5.1"
+    androidCoreKtxVersion              = "1.9.0"
+    materialVersion                    = '1.6.1'
     legacyVersion                      = "1.0.0"
     roomVersion                        = "2.4.3"
-    gradleVersion                      = "7.0.0"
+    gradleVersion                      = "7.3.0"
 
     //Kotlin
     kotlinGradleVersion                = "1.6.10"
-    kotlinxCoroutines                  = "1.6.0"
+    kotlinxCoroutines                  = '1.6.4'
 
     //Libs
     datastoreVersion                   = "1.0.0"
-    lifecycleVersion                   = "2.4.1"
+    lifecycleVersion                   = '2.5.1'
     shimmerVersion                     = "0.5.0"
-    glideVersion                       = "4.13.1"
-    navVersion                         = "2.4.1"
+    glideVersion                       = '4.14.2'
+    navVersion                         = '2.5.2'
     javaxVersion                       = "1"
     gsonVersion                        = "2.9.0"
     retrofitVersion                    = "2.9.0"
-    firebase                           = "30.1.0"
+    firebase                           = '31.0.0'
     firebasePlugin                     = "2.9.1"
+    firebaseCore                       = "11.6.2"
     googleServices                     = "4.3.8"
-    hilt                               = "2.41"
-    navigation                         = "2.3.4"
+    googleGms                          = "21.2.0"
+    hilt                               = '2.44'
+    navigation                         = '2.5.2'
     detekt                             = "1.19.0"
     paging                             = "3.1.1"
 
     //Tests
     customTestRunner                   = "com.example.marvelapp.CustomTestRunner"
-    mockWebServerVersion               = "4.9.3"
+    mockWebServerVersion               = '5.0.0-alpha.10'
     orchestratorVersion                = "1.4.1"
-    espressoVersion                    = "3.3.0"
-    fragmentVersion                    = "1.4.1"
+    espressoVersion                    = '3.4.0'
+    fragmentVersion                    = '1.5.3'
     runnerVersion                      = "1.4.0"
     junitTestVersion                   = "1.1.3"
     junitVersion                       = "4.13.2"
@@ -65,8 +66,9 @@ ext{
             gradleVersion        : "com.android.tools.build:gradle:$gradleVersion",
             kotlinGradleVersion  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradleVersion",
             googleServices       : "com.google.gms:google-services:$googleServices",
+            googleGms            : "com.google.android.gms:play-services-measurement-api:$googleGms",
             navArgs              : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation",
-            hiltGradle           : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",
+            firebaseCrash        : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",
             hilt                 : "com.google.dagger:hilt-android-gradle-plugin:$hilt",
             hiltCompiler         : "com.google.dagger:hilt-android-compiler:$hilt",
             hiltAndroid          : "com.google.dagger:hilt-android:$hilt"
@@ -84,7 +86,7 @@ ext{
             firebaseBom          : "com.google.firebase:firebase-bom:$firebase",
             firebaseAnalytics    : "com.google.firebase:firebase-analytics-ktx",
             firebaseCrashlytics  : "com.google.firebase:firebase-crashlytics-ktx",
-            firebaseCore         : "com.google.firebase:firebase-core:11.6.2",
+            firebaseCore         : "com.google.firebase:firebase-core:$firebaseCore",
             firebaseConfig       : "com.google.firebase:firebase-config-ktx",
             firebaseDisplay      : "com.google.firebase:firebase-inappmessaging-display-ktx",
             firebasePlugin       : "com.google.firebase:firebase-crashlytics-gradle:$firebasePlugin",

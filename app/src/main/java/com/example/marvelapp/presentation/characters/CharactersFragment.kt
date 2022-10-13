@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,7 +30,10 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CharactersFragment : Fragment(R.layout.fragment_characters), SearchView.OnQueryTextListener,
+class CharactersFragment :
+    Fragment(R.layout.fragment_characters),
+    MenuProvider,
+    SearchView.OnQueryTextListener,
     MenuItem.OnActionExpandListener {
 
     private val binding by viewBinding(FragmentCharactersBinding::bind)
@@ -64,16 +68,12 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), SearchView.On
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
         observerInitialLoadingState()
         observerSortingData()
+        initMenu()
 
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -162,8 +162,13 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), SearchView.On
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.characteres_menu_itens, menu)
+    private fun initMenu(){
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(this,viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.characteres_menu_itens, menu)
 
         val searchItem = menu.findItem(R.id.menu_search)
         searchView = searchItem.actionView as SearchView
@@ -181,6 +186,16 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), SearchView.On
         }
     }
 
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menu_sort -> {
+                findNavController().navigate(R.id.action_charactersFragment_to_sortFragment)
+                true
+            }
+            else -> false
+        }
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
         return query?.let {
             viewModel.currentSearchQuery = it
@@ -193,24 +208,14 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), SearchView.On
         return false
     }
 
-    override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+    override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
         return true
     }
 
-    override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+    override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
         viewModel.closeSearch()
         viewModel.searchCharacters()
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_sort -> {
-                findNavController().navigate(R.id.action_charactersFragment_to_sortFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onDestroy() {

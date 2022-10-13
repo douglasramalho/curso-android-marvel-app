@@ -18,7 +18,6 @@ storeKeyProperties.load(new FileInputStream(storeKeyPropertiesFile))
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     signingConfigs {
         release {
@@ -80,10 +79,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.marvelapp'
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-measurement-api:21.0.0'
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
     def presentationDependencies = rootProject.ext.presentationDependencies
     def masterTestDependencies = rootProject.ext.masterTestDependencies
@@ -99,6 +98,7 @@ dependencies {
     implementation masterDependencies.androidCoreKtx
     implementation masterDependencies.legacySupport
     implementation masterDependencies.appcompat
+    implementation masterDependencies.googleGms
 
     kapt(dataDependencies.roomCompiler) {
         exclude group: 'com.intellij', module: 'annotations'
