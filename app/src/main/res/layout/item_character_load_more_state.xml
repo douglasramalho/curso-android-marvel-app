@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_try_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_800"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:text="@string/error_loading_more_try_again"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <ProgressBar
+        android:id="@+id/progress_loading_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
