@@ -25,8 +25,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "PUBLIC_KEY", apikeyProperties ['PUBLIC_KEY']
-        buildConfigField "String", "PRIVATE_KEY", apikeyProperties ['PRIVATE_KEY']
+        buildConfigField "String", "PUBLIC_KEY", apikeyProperties['PUBLIC_KEY']
+        buildConfigField "String", "PRIVATE_KEY", apikeyProperties['PRIVATE_KEY']
         buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com:443/v1/public/"'
     }
 
@@ -36,15 +36,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions{
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -97,10 +97,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
 
     // Unit tests
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation project(":testing")
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Instrumentation tests
