@@ -45,5 +45,6 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbarApp.setNavigationIcon(R.drawable.ic_back)
             }
         }
+
     }
 }

@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    //Debug network - Log in logcat all requests and responses in app
+    //if condition - show in log just for DEBUG version, don't show in other versions
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
