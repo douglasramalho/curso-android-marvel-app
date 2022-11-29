@@ -308,9 +308,6 @@ formatting:
   ModifierOrdering:
     active: true
     autoCorrect: true
-  MultiLineIfElse:
-    active: true
-    autoCorrect: true
   NoBlankLineBeforeRbrace:
     active: true
     autoCorrect: true
@@ -351,9 +348,6 @@ formatting:
     autoCorrect: true
   SpacingAroundAngleBrackets:
     active: false
-    autoCorrect: true
-  SpacingAroundColon:
-    active: true
     autoCorrect: true
   SpacingAroundComma:
     active: true
