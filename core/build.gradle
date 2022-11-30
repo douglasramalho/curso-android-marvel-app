@@ -22,4 +22,13 @@ dependencies {
 
     // Gson
     api 'com.google.code.gson:gson:2.9.0'
+
+    // Paging3 Common
+    implementation "androidx.paging:paging-common:$paging_version"
+
+    // Javax Inject
+    implementation "javax.inject:javax.inject:1"
+
+    // Coroutines core
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 }
