@@ -1,6 +1,6 @@
 package com.example.marvelapp.framework.di
 
-import br.com.liebersonsantos.core.data.network.interceptor.AuthorizationInterceptor
+import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

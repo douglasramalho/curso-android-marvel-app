@@ -1,6 +1,6 @@
-package br.com.liebersonsantos.core.data.network
+package com.example.marvelapp.framework.network
 
-import br.com.liebersonsantos.core.data.network.response.DataWrapperResponse
+import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 

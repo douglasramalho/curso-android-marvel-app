@@ -1,4 +1,4 @@
-package br.com.liebersonsantos.core.data.network.response
+package com.example.marvelapp.framework.network.response
 
 data class ThumbnailResponse(
     val path: String,
