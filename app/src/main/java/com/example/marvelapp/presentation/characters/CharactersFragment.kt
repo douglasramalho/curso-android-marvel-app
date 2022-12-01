@@ -10,11 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.marvelapp.databinding.FragmentCharactersBinding
+import com.example.marvelapp.framework.imageloader.ImageLoader
+import com.example.marvelapp.presentation.detail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
@@ -23,6 +28,9 @@ class CharactersFragment : Fragment() {
     private val binding: FragmentCharactersBinding get() = _binding!!
 
     private val viewModel: CharactersViewModel by viewModels()
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     private lateinit var charactersAdapter: CharactersAdapter
 
@@ -52,7 +60,17 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initCharactersAdapter() {
-        charactersAdapter = CharactersAdapter()
+        charactersAdapter = CharactersAdapter(imageLoader) { character, view ->
+            val extras = FragmentNavigatorExtras(
+                view to character.name
+            )
+            val directions = CharactersFragmentDirections.actionCharactersFragmentToDetailFragment(
+                character.name,
+                DetailViewArg(character.name, character.imageUrl)
+            )
+            findNavController().navigate(directions, extras)
+        }
+
         with(binding.recyclerCharacter) {
             scrollToPosition(0)
             setHasFixedSize(true)
@@ -94,6 +112,11 @@ class CharactersFragment : Fragment() {
                 startShimmer()
             } else stopShimmer()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
