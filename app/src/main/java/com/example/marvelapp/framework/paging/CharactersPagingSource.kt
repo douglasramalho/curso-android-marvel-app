@@ -11,7 +11,8 @@ class CharactersPagingSource(
     private val remoteDataSource: CharactersRemoteDataSource<DataWrapperResponse>,
     private val query: String
 ): PagingSource<Int, Character>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
+
+    override suspend fun load(params: LoadParams<Int>) : LoadResult<Int, Character> {
         return try {
             val offset = params.key ?: 0
             val queries = hashMapOf("offset" to offset.toString())
@@ -30,10 +31,8 @@ class CharactersPagingSource(
                 nextKey = if (responseOffset < totalCharacters) {
                     responseOffset + LIMIT
                 } else null
-
             )
-
-        } catch (exception: Exception){
+        } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
     }

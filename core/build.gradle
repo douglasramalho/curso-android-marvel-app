@@ -24,8 +24,8 @@ dependencies{
     // Paging3 Common
     implementation "androidx.paging:paging-common:$paging_version"
 
-    // Java inject
-    implementation "javax.inject:javax.injec:1"
+    // Javax Inject
+    implementation "javax.inject:javax.inject:1"
 
     // Coroutines core
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
