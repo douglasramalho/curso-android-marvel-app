@@ -18,10 +18,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\diego\\AndroidStudioProjects\\Assinatura\\ChaveApps.jks')
-            storePassword 'Ontologia.123'
-            keyAlias 'Loja Dromer'
-            keyPassword 'Ontologia.123'
+            storeFile file('C:\\Users\\diego\\AndroidStudioProjects\\curso-android-marvel-app\\Assinatura\\MarvelApi.jks')
+            storePassword 'MarvelApi'
+            keyAlias 'MarvelApi'
+            keyPassword 'MarvelApi'
         }
     }
 
