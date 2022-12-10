@@ -18,7 +18,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/diego/AndroidStudioProjects/curso-android-marvel-app/assinatura/marvelapi.jks')
+            storeFile file('/Users/diego/AndroidStudioProjects/assinatura/marvelapi.jks')
             storePassword 'MarvelApi'
             keyAlias 'MarvelApi'
             keyPassword 'MarvelApi'
