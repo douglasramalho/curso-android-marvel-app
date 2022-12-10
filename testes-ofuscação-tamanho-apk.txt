@@ -1,0 +1,7 @@
+apk release
+size     2,5MB
+download 1,7MB
+
+apk debug
+size     7,2MB
+download 6,4MB
