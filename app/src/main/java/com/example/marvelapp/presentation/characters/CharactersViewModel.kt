@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import br.com.liebersonsantos.core.usecase.GetCharactersUseCase
-import kotlinx.coroutines.flow.Flow
 import br.com.liebersonsantos.core.domain.model.Character
+import br.com.liebersonsantos.core.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel

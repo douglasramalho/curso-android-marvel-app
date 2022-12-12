@@ -40,7 +40,7 @@ class CharactersFragment : Fragment() {
         observeInitialLoadState()
 
         lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.charactersPagingData("").collect { pagingData ->
                     charactersAdapter.submitData(pagingData)
                 }
