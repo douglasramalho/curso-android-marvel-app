@@ -3,7 +3,6 @@ package com.example.marvelapp.framework.di
 import com.example.core.data.repository.CharactersRemoteDataSource
 import com.example.core.data.repository.CharactersRepository
 import com.example.marvelapp.framework.CharactersRepositoryImpl
-import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import com.example.marvelapp.framework.remote.RetrofitCharactersDataSource
 import dagger.Binds
 import dagger.Module
@@ -20,5 +19,5 @@ interface RepositoryModule {
     @Binds
     fun bindRemoteDataSource(
         dataSource: RetrofitCharactersDataSource
-    ): CharactersRemoteDataSource<DataWrapperResponse>
+    ): CharactersRemoteDataSource
 }

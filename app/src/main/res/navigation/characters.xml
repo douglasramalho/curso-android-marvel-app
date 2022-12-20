@@ -10,5 +10,21 @@
         android:id="@+id/charactersFragment"
         android:name="com.example.marvelapp.presentation.characters.CharactersFragment"
         android:label="@string/characters_screen_title"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_charactersFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.marvelapp.presentation.detail.DetailFragment"
+        android:label="{screenTitle}"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="screenTitle"
+            app:argType="string" />
+        <argument
+            android:name="detailViewArg"
+            app:argType="com.example.marvelapp.presentation.detail.DetailViewArg" />
+    </fragment>
 </navigation>
