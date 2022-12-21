@@ -27,5 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_item_category"
         tools:itemCount="6"
-        tools:listitem="@layout/item_child_detail" />
+        tools:listitem="@layout/item_child_detail"
+        android:layout_marginBottom="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

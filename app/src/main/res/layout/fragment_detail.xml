@@ -17,17 +17,44 @@
         tools:ignore="ContentDescription"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_parent_detail"
+    <ViewFlipper
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:padding="16dp"
-        android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_character"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_parent_detail" />
+        android:id="@+id/flipper_detail"
+        app:layout_constraintTop_toBottomOf="@id/image_character">
+
+        <include layout="@layout/include_view_detail_loading_state" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_parent_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_parent_detail" />
+
+        <include
+            android:id="@+id/include_error_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/include_error_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_no_result"
+            android:alpha="0.5"
+            android:padding="16dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/common_no_results_found"
+            app:drawableTopCompat="@drawable/ic_neutral" />
+    </ViewFlipper>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
