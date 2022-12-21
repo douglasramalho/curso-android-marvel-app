@@ -22,10 +22,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class CharactersViewModelTest {
 
-    @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutinesRule = MainCoroutinesRule()
 
@@ -43,13 +43,11 @@ class CharactersViewModelTest {
         )
     )
 
-    @ExperimentalCoroutinesApi
     @Before
     fun setUp() {
         charactersViewModel = CharactersViewModel(getCharactersUseCase)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun `should validate the paging data object values when calling charactersPagingData`() =
         runBlockingTest  {
@@ -66,7 +64,6 @@ class CharactersViewModelTest {
             assertNotNull(result.first())
     }
 
-    @ExperimentalCoroutinesApi
     @Test(expected = java.lang.RuntimeException::class)
     fun `should throw an exception when the calling to the use case returns an exception`()
     = runBlockingTest {
