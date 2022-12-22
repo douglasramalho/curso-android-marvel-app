@@ -7,6 +7,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
+apply from: '../config/detekt/detekt.gradle'
 
 android {
     compileSdkVersion 33
@@ -100,4 +101,6 @@ dependencies {
     // Instrumentation tests
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
 }
