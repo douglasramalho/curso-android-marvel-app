@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -44,7 +45,7 @@ class GetCharactersUseCaseImplTest {
 
     @Test
     fun `should validate flow paging data creating when invoke from use case is called`()
-    = runBlockingTest {
+    = runTest {
         whenever(repository.getCharacters(""))
             .thenReturn(fakePagingSource)
 

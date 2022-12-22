@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.model.Comic
 import com.example.core.domain.model.Event
 import com.example.core.usecase.GetCharacterCategoriesUseCase
-import com.example.core.usecase.GetCharacterCategoriesUseCase.GetComicsParams
+import com.example.core.usecase.GetCharacterCategoriesUseCase.GetCategoriesParams
 import com.example.core.usecase.base.ResultStatus
 import com.example.marvelapp.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,8 @@ class DetailViewModel @Inject constructor(
     val uiState: LiveData<UiState> get() = _uiState
 
     fun getCharacterCategories(characterId: Int) = viewModelScope.launch {
-        getCharacterCategoriesUseCase(GetComicsParams(characterId))
+        getCharacterCategoriesUseCase
+            .invoke(GetCategoriesParams(characterId))
             .watchStatus()
     }
 
@@ -58,11 +59,9 @@ class DetailViewModel @Inject constructor(
                             }
                         }
 
-                        if (detailParentList.isNotEmpty()){
+                        if (detailParentList.isNotEmpty()) {
                             UiState.Success(detailParentList)
-                        }else UiState.Empty
-
-                        UiState.Success(detailParentList)
+                        } else UiState.Empty
                     }
                     is ResultStatus.Error -> UiState.Error
                 }
