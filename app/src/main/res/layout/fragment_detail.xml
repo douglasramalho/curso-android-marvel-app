@@ -18,12 +18,33 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ViewFlipper
+        android:id="@+id/flipper_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_favorite_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            tools:srcCompat="@drawable/ic_favorite_checked" />
+
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+    <ViewFlipper
+        android:id="@+id/flipper_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/flipper_detail"
         app:layout_constraintTop_toBottomOf="@id/image_character">
 
         <include layout="@layout/include_view_detail_loading_state" />
@@ -42,17 +63,17 @@
 
         <include
             android:id="@+id/include_error_view"
+            layout="@layout/include_error_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/include_error_view" />
+            android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/text_no_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_no_result"
+            android:layout_gravity="center_horizontal"
             android:alpha="0.5"
             android:padding="16dp"
-            android:layout_gravity="center_horizontal"
             android:text="@string/common_no_results_found"
             app:drawableTopCompat="@drawable/ic_neutral" />
     </ViewFlipper>
