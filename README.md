@@ -17,3 +17,10 @@ https://bit.ly/3sHLdNE
         run detekt <code>gradle detekt</code>
     </li>
 </ul>
+
+<h1>Create API Key</h1>
+<h4>Create <code>apikey.properties</code> in root project</h4>
+<ul>
+    <li><code>PUBLIC_KEY</code>="****************"</li>
+    <li><code>SECRET_KEY</code>="****************"</li>
+</ul>
