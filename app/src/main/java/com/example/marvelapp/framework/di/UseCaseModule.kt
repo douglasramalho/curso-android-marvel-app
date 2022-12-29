@@ -9,6 +9,8 @@ import com.example.core.usecase.AddFavoriteUseCase
 import com.example.core.usecase.AddFavoriteUseCaseImpl
 import com.example.core.usecase.CheckFavoriteUseCase
 import com.example.core.usecase.CheckFavoriteUseCaseImpl
+import com.example.core.usecase.GetFavoritesUseCase
+import com.example.core.usecase.GetFavoritesUseCaseImpl
 import com.example.core.usecase.RemoveFavoriteUseCase
 import com.example.core.usecase.RemoveFavoriteUseCaseImpl
 import com.example.marvelapp.presentation.detail.FavoriteUiActionStateLiveData
@@ -36,4 +38,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindRemoveFavoriteUseCase(useCase: RemoveFavoriteUseCaseImpl): RemoveFavoriteUseCase
+
+    @Binds
+    fun bindGetFavoritesUseCase(useCase: GetFavoritesUseCaseImpl): GetFavoritesUseCase
 }
