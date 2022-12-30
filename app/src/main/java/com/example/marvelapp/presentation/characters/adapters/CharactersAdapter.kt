@@ -1,4 +1,4 @@
-package com.example.marvelapp.presentation.characters
+package com.example.marvelapp.presentation.characters.adapters
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter

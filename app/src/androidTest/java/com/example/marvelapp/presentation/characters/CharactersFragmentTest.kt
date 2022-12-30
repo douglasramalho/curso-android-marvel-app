@@ -15,6 +15,7 @@ import com.example.marvelapp.R
 import com.example.marvelapp.extension.asJsonString
 import com.example.marvelapp.framework.di.BaseUrlModule
 import com.example.marvelapp.framework.di.CoroutinesModule
+import com.example.marvelapp.presentation.characters.adapters.CharactersViewHolder
 import dagger.hilt.android.testing.UninstallModules
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
