@@ -9,10 +9,14 @@ import com.example.core.usecase.AddFavoriteUseCase
 import com.example.core.usecase.AddFavoriteUseCaseImpl
 import com.example.core.usecase.CheckFavoriteUseCase
 import com.example.core.usecase.CheckFavoriteUseCaseImpl
+import com.example.core.usecase.GetCharactersSortingUseCase
+import com.example.core.usecase.GetCharactersSortingUseCaseImpl
 import com.example.core.usecase.GetFavoritesUseCase
 import com.example.core.usecase.GetFavoritesUseCaseImpl
 import com.example.core.usecase.RemoveFavoriteUseCase
 import com.example.core.usecase.RemoveFavoriteUseCaseImpl
+import com.example.core.usecase.SaveCharactersSortingUseCase
+import com.example.core.usecase.SaveCharactersSortingUseCaseImpl
 import com.example.marvelapp.presentation.detail.FavoriteUiActionStateLiveData
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,4 +45,14 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetFavoritesUseCase(useCase: GetFavoritesUseCaseImpl): GetFavoritesUseCase
+
+    @Binds
+    fun bindGetCharactersSortingUseCase(
+        useCase: GetCharactersSortingUseCaseImpl
+    ): GetCharactersSortingUseCase
+
+    @Binds
+    fun bindSaveCharactersSortingUseCase(
+        useCase: SaveCharactersSortingUseCaseImpl
+    ): SaveCharactersSortingUseCase
 }

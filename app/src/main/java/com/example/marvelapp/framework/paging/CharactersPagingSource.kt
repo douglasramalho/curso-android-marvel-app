@@ -29,7 +29,7 @@ class CharactersPagingSource(
             val totalCharacters = characterPaging.total
 
             LoadResult.Page(
-                data = characterPaging.character,
+                data = characterPaging.characters,
                 prevKey = null,
                 nextKey = if (responseOffset < totalCharacters) {
                     responseOffset + LIMIT

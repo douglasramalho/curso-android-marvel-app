@@ -67,7 +67,7 @@ class CharactersRemoteMediator @Inject constructor(
                     RemoteKey(nextOffset = responseOffset + state.config.pageSize)
                 )
 
-                val charactersEntities = characterPaging.character.map {
+                val charactersEntities = characterPaging.characters.map {
                     CharacterEntity(
                         id = it.id,
                         name = it.name,

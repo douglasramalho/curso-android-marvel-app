@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_charactersFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_charactersFragment_to_sortFragment"
+            app:destination="@id/sortFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -27,4 +30,8 @@
             android:name="detailViewArg"
             app:argType="com.example.marvelapp.presentation.detail.DetailViewArg" />
     </fragment>
+    <dialog
+        android:id="@+id/sortFragment"
+        android:name="com.example.marvelapp.presentation.sort.SortFragment"
+        tools:layout="@layout/fragment_sort"/>
 </navigation>
