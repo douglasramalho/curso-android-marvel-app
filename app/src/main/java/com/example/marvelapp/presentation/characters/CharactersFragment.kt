@@ -5,16 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.FragmentCharactersBinding
 import com.github.coutinhonobre.core.domain.model.Character
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
 
     private var _binding: FragmentCharactersBinding? = null
     private val binding: FragmentCharactersBinding get() = _binding!!
+
+    private val viewModel: CharactersViewModel by viewModels()
 
     private val charactersAdapter = CharactersAdapter()
 
@@ -33,30 +38,11 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initCharactersAdapter()
 
-        charactersAdapter.submitList(
-            listOf(
-                Character(
-                    name = "Spider Man 1",
-                    imageUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
-                ),
-                Character(
-                    name = "Spider Man 2",
-                    imageUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
-                ),
-                Character(
-                    name = "Spider Man 3",
-                    imageUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
-                ),
-                Character(
-                    name = "Spider Man 4",
-                    imageUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
-                ),
-                Character(
-                    name = "Spider Man 5",
-                    imageUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
-                )
-            )
-        )
+        lifecycleScope.launch {
+            viewModel.charactersPagingData(query = "").collect { pagingData ->
+                charactersAdapter.submitData(pagingData)
+            }
+        }
     }
 
     private fun initCharactersAdapter() {
