@@ -24,7 +24,7 @@ class CharactersLoadMoreStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): CharactersLoadMoreStateViewHolder{
+        fun create(parent: ViewGroup, retry: () -> Unit) : CharactersLoadMoreStateViewHolder {
             val itemBinding = ItemCharacterLoadMoreStateBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
 
