@@ -6,12 +6,12 @@ import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import com.example.testing.MainCoroutineRule
 import com.example.testing.model.CharacterFactory
 import com.github.coutinhonobre.core.data.repository.CharactersRemoteDataSource
+import com.github.coutinhonobre.core.domain.model.Character
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -69,6 +69,28 @@ class CharactersPagingSourceTest {
                 prevKey = null,
                 nextKey = 20
             ),
+            result
+        )
+    }
+
+    @Test
+    fun `should return a error load result when load is called`() = runTest {
+        // Arrange
+        val exception = RuntimeException()
+        whenever(remoteDataSource.fetchCharacters(any())).thenThrow(exception)
+
+        // Act
+        val result = charactersPagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = null,
+                loadSize = 2,
+                placeholdersEnabled = false
+            )
+        )
+
+        // Assert
+        assertEquals(
+            PagingSource.LoadResult.Error<Int, Character>(exception),
             result
         )
     }
