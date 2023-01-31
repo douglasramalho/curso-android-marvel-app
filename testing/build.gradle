@@ -10,6 +10,10 @@ java {
 
 dependencies {
     api project(":core")
+
+    // Paging3 Common
+    api "androidx.paging:paging-common:$paging_version"
+
     // Unit tests
     api 'junit:junit:4.13.2'
     api "androidx.arch.core:core-testing:2.1.0"

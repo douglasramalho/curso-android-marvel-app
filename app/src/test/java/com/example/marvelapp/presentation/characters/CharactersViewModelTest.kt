@@ -32,12 +32,10 @@ class CharactersViewModelTest {
 
     private lateinit var charactersViewModel: CharactersViewModel
 
-    private val characterFactory = CharacterFactory()
-
     private val pagingDataCharacters = PagingData.from(
         listOf(
-            characterFactory.create(hero = CharacterFactory.Hero.ThreeDMan),
-            characterFactory.create(hero = CharacterFactory.Hero.ABom)
+            CharacterFactory.create(hero = CharacterFactory.Hero.ThreeDMan),
+            CharacterFactory.create(hero = CharacterFactory.Hero.ABom)
         )
     )
 
