@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MarvelAppMirror</string>
+    <string name="app_name">Heroes</string>
     <string name="common_no_internet_connection">No internet connection</string>
     <string name="common_try_again">Try again</string>
 
