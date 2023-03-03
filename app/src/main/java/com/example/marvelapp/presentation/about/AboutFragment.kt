@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.example.marvelapp.R
 
 class AboutFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
