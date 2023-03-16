@@ -13,7 +13,18 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
+
     compileSdkVersion 33
+
+    signingConfigs {
+        release {
+            // Obfuscate this like PRIVATE_KEY
+            storeFile file('C:\\Users\\NeoPh\\Documents\\GitHub\\curso-android-marvel-app\\store\\marvel_app_key_store.jks')
+            storePassword 'Marvel@123'
+            keyAlias 'marvel-app'
+            keyPassword 'Marvel@123'
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.marvelapp"
@@ -30,8 +41,25 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            debuggable true
+        }
+        // pre production
+        staging {
+            // test obfuscation
+            initWith debug
+            minifyEnabled true // obfuscation
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+                    'proguard-rules-staging.pro' // for debug in obfuscated code
+
+            // verify all libraries that work with obfuscation for proguard rules/.cfg
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release // To generate/build release build in Android Studio
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
