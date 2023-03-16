@@ -2,6 +2,7 @@ package com.example.marvelapp.framework.paging
 
 import androidx.paging.PagingSource
 import com.example.core.data.repository.CharactersRemoteDataSource
+import com.example.core.domain.model.Character
 import com.example.marvelapp.factory.response.DataWrapperResponseFactory
 import com.example.marvelapp.framework.network.response.DataWrapperResponse
 import com.example.testing.MainCoroutineRule
@@ -67,7 +68,27 @@ class CharactersPagingSourceTest {
                 20
             ), result
         )
+    }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `should return an error load result when load is called `() = runTest {
+        // Arrange
+        val exception = RuntimeException()
+        whenever(remoteDataSource.fetchCharacters(any()))
+            .thenThrow(exception)
+
+        // Act
+        val result = charactersPagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = null,
+                loadSize = 2,
+                placeholdersEnabled = false
+            )
+        )
+
+        // Assert
+        assertEquals(PagingSource.LoadResult.Error<Int, Character>(exception), result)
     }
 
 }
