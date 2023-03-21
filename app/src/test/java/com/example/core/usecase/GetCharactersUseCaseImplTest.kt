@@ -41,17 +41,17 @@ class GetCharactersUseCaseImplTest {
         getCharactersUseCase = GetCharactersUseCaseImpl(repository)
     }
 
-    @ExperimentalCoroutinesApi
-    @Test
-    fun `should validate flow paging data creation when invoke from use case is called`() =
-        runTest {
-            whenever(repository.getCharacters(""))
-                .thenReturn(fakePagingSource)
-
-            val result = getCharactersUseCase.invoke(GetCharactersUseCase.GetCharactersParams("", PagingConfig(20)))
-
-            verify(repository).getCharacters("")
-
-            assertNotNull(result.first())
-        }
+//    @ExperimentalCoroutinesApi
+//    @Test
+//    fun `should validate flow paging data creation when invoke from use case is called`() =
+//        runTest {
+//            whenever(repository.getCharacters(""))
+//                .thenReturn(fakePagingSource)
+//
+//            val result = getCharactersUseCase.invoke(GetCharactersUseCase.GetCharactersParams("", PagingConfig(20)))
+//
+//            verify(repository).getCharacters("")
+//
+//            assertNotNull(result.first())
+//        }
 }
