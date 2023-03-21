@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
+//@RunWith(MockitoJUnitRunner::class)
 class GetCharactersUseCaseImplTest {
 
 //    @ExperimentalCoroutinesApi
