@@ -19,7 +19,7 @@ android {
     signingConfigs {
         release {
             // Obfuscate this like PRIVATE_KEY
-            storeFile file('C:\\Users\\NeoPh\\Documents\\GitHub\\curso-android-marvel-app\\store\\marvel_app_key_store.jks')
+            storeFile file('C:/Users/NeoPh/Documents/GitHub/curso-android-marvel-app/store/marvel_app_key_store.jks')
             storePassword 'Marvel@123'
             keyAlias 'marvel-app'
             keyPassword 'Marvel@123'
