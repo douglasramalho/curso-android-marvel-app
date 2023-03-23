@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="4.3">
+<file name="C:/Users/Veloso/dev/curso-android-marvel-app/app/src/main/java/com/example/marvelapp/MainActivity.kt">
+	<error line="4" column="1" severity="warning" message="android.os.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+</checkstyle>
