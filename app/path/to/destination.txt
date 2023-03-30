@@ -1,1 +1,0 @@
-WildcardImport - [MainActivity.kt] at C:\Users\Veloso\dev\curso-android-marvel-app\app\src\main\java\com\example\marvelapp\MainActivity.kt:4:1 - Signature=MainActivity.kt$import android.os.*
