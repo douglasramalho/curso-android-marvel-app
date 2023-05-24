@@ -2,7 +2,7 @@ apply plugin: 'io.gitlab.arturbosch.detekt'
 
 project.afterEvaluate{
     tasks.named("preBuild") {
-        evaluationDependsOn("deteKt")
+        dependsOn("detekt")
     }
 }
 
