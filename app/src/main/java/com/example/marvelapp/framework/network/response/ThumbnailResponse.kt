@@ -8,4 +8,4 @@ data class ThumbnailResponse(
 )
 
 val ThumbnailResponse.imageUrl: String
-    get() = "${path}.${extension}"
+    get() = "${path}.${extension}".replace("http", "https")
