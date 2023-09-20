@@ -28,4 +28,5 @@
         app:layout_constraintTop_toBottomOf="@+id/text_item_category"
         tools:itemCount="5"
         tools:listitem="@layout/item_child_detail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
