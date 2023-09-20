@@ -67,7 +67,7 @@ class CharactersFragment : Fragment() {
 
             val directions = CharactersFragmentDirections
                 .actionCharactersFragmentToDetailFragment(
-                    DetailViewArg(character.name, character.imageUrl),
+                    DetailViewArg(character.id, character.name, character.imageUrl),
                     character.name
                 )
 
