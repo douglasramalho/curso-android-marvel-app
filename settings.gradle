@@ -1,3 +1,2 @@
 rootProject.name = "curso-android-marvel-app"
 include ':app'
-include ':core'

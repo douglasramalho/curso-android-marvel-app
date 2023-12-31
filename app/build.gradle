@@ -27,7 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -39,9 +39,6 @@ android {
 }
 
 dependencies {
-
-    // Modulo Core
-    implementation project(':core')
 
     // AndroidX
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -66,11 +63,6 @@ dependencies {
     def coroutines = "1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
-
-    // Retrofit
-    def retrofit_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     // OkHttp
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
