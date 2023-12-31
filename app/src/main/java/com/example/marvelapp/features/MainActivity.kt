@@ -22,11 +22,24 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
 
         navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.charactersFragment,
+                R.id.favoritesFragment,
+                R.id.aboutFragment
+            )
+        )
 
         binding.bottomNavMain.setupWithNavController(navController)
+        binding.toolbarApp.setupWithNavController(navController, appBarConfiguration)
 
-        appBarConfiguration = AppBarConfiguration(
-            setOf()
-        )
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val isTopLevelDestination =
+                appBarConfiguration.topLevelDestinations.contains(destination.id)
+
+            if(!isTopLevelDestination) {
+                binding.toolbarApp.setNavigationIcon(R.drawable.ic_back)
+            }
+        }
     }
 }
