@@ -3,4 +3,8 @@
     <!--             General sizes                   -->
     <dimen name="size_0dp">0dp</dimen>
     <dimen name="size_56dp">56dp</dimen>
+
+    <!--             Font sizes                   -->
+    <dimen name="size_8sp">8sp</dimen>
+    <dimen name="size_9sp">9sp</dimen>
 </resources>
