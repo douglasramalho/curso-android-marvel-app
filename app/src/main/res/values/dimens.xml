@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--             General sizes                   -->
+    <dimen name="size_0dp">0dp</dimen>
+    <dimen name="size_56dp">56dp</dimen>
+</resources>
