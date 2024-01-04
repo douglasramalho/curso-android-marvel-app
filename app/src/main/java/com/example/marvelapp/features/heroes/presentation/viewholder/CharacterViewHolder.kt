@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.ItemCharacterBinding
-import com.example.marvelapp.features.heroes.domain.model.Character
+import com.example.marvelapp.features.heroes.domain.entities.CharacterEntity
 
 class CharacterViewHolder(
     itemCharacterBinding: ItemCharacterBinding
@@ -15,7 +15,7 @@ class CharacterViewHolder(
     private val textName = itemCharacterBinding.textName
     private val imageCharacter = itemCharacterBinding.imageCharacters
 
-    fun bind(character: Character) {
+    fun bind(character: CharacterEntity) {
         textName.text = character.name
 
         Glide.with(itemView)
