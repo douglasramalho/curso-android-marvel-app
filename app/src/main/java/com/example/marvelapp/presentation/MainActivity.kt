@@ -1,9 +1,8 @@
 package com.example.marvelapp.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -28,7 +27,20 @@ class MainActivity : AppCompatActivity() {
     binding.bottomNavMain.setupWithNavController(navController)
 
     appBarConfiguration = AppBarConfiguration(
-      setOf()
+      setOf(
+        R.id.charactersFragment,
+        R.id.favoritesFragment,
+        R.id.aboutFragment
+      )
     )
+
+    binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      val isTopLevelDestination = appBarConfiguration.topLevelDestinations.contains(destination.id)
+      if (!isTopLevelDestination) {
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+      }
+    }
   }
 }
