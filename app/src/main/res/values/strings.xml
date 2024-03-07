@@ -1,36 +1,36 @@
 <resources>
-    <string name="app_name">MarvelAppMirror</string>
-    <string name="common_no_internet_connection">No internet connection</string>
-    <string name="common_try_again">Try again</string>
+  <string name="app_name">MarvelAppMirror</string>
+  <string name="common_no_internet_connection">No internet connection</string>
+  <string name="common_try_again">Try again</string>
 
-    <string name="error_loading_more_try_again">Error when trying to load the next page. Try again</string>
+  <string name="error_loading_more_try_again">Error when trying to load the next page. Try again</string>
 
-    <!-- App Menu -->
-    <string name="app_menu_heroes">Heroes</string>
-    <string name="app_menu_favorites">Favorites</string>
-    <string name="app_menu_about">About</string>
+  <!-- App Menu -->
+  <string name="app_menu_heroes">Heroes</string>
+  <string name="app_menu_favorites">Favorites</string>
+  <string name="app_menu_about">About</string>
 
-    <string name="menu_search">Search</string>
-    <string name="menu_sort">Sort</string>
+  <string name="menu_search">Search</string>
+  <string name="menu_sort">Sort</string>
 
-    <string name="characters_screen_title">Characters</string>
-    <string name="characters_no_results_found">No results found</string>
+  <string name="characters_screen_title">Characters</string>
+  <string name="characters_no_results_found">No results found</string>
 
-    <string name="details_comics_category">Comics</string>
+  <string name="details_comics_category">Comics</string>
 
-    <string name="favorites_screen_title">Favorites</string>
-    <string name="favorites_no_products_in_the_list">No heroes in the favorite list</string>
+  <string name="favorites_screen_title">Favorites</string>
+  <string name="favorites_no_products_in_the_list">No heroes in the favorite list</string>
 
-    <!-- Ordering -->
-    <string name="sort_order_by">Order by</string>
-    <string name="sort_order_by_name">Name</string>
-    <string name="sort_order_by_modified">Modificado</string>
-    <string name="sort_order">Order</string>
-    <string name="sort_order_ascending">Ascending</string>
-    <string name="sort_order_descending">Descending</string>
-    <string name="sort_apply">Apply</string>
+  <!-- Ordering -->
+  <string name="sort_order_by">Order by</string>
+  <string name="sort_order_by_name">Name</string>
+  <string name="sort_order_by_modified">Modificado</string>
+  <string name="sort_order">Order</string>
+  <string name="sort_order_ascending">Ascending</string>
+  <string name="sort_order_descending">Descending</string>
+  <string name="sort_apply">Apply</string>
 
-    <!-- About -->
-    <string name="about_screen_title">About</string>
-    <string name="about_attribution">Data provided by Marvel. © 2021 Marvel</string>
+  <!-- About -->
+  <string name="about_screen_title">About</string>
+  <string name="about_attribution">Data provided by Marvel. © 2021 Marvel</string>
 </resources>
