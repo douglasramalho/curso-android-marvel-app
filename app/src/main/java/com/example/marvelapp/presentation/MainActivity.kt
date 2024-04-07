@@ -1,10 +1,11 @@
 package com.example.marvelapp.presentation
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.ActivityMainBinding
@@ -12,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -20,9 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarApp)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_container) as NavHostFragment
 
         navController = navHostFragment.navController
 
@@ -31,20 +32,20 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.charactersFragment,
+                R.id.favoritesFragment,
                 R.id.aboutFragment,
-                R.id.favoritesFragment
+                R.id.sortFragment
             )
         )
 
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.toolbarApp.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val isTopLevelDestination =
-                appBarConfiguration.topLevelDestinations.contains(destination.id)
+            val isTopLevelDestination = appBarConfiguration.topLevelDestinations.contains(destination.id)
             if (!isTopLevelDestination) {
                 binding.toolbarApp.setNavigationIcon(R.drawable.ic_back)
             }
-
         }
     }
 }

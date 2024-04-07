@@ -1,9 +1,9 @@
 package com.example.marvelapp.framework.di
 
+import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import com.example.marvelapp.BuildConfig
 import com.example.marvelapp.framework.di.qualifier.BaseUrl
 import com.example.marvelapp.framework.network.MarvelApi
-import com.example.marvelapp.framework.network.interceptor.AuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,25 +19,11 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val TIMEOUT_SECONDS = 5L
-
-    @Provides
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory,
-        @BaseUrl baseUrl: String
-    ): MarvelApi {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(okHttpClient)
-            .addConverterFactory(converterFactory)
-            .build()
-            .create(MarvelApi::class.java)
-    }
+    private const val TIMEOUT_SECONDS = 15L
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
+        return HttpLoggingInterceptor().apply{
             setLevel(
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
@@ -49,9 +35,9 @@ object NetworkModule {
     @Provides
     fun provideAuthorizationInterceptor(): AuthorizationInterceptor {
         return AuthorizationInterceptor(
-            BuildConfig.PUBLIC_KEY, BuildConfig.PRIVATE_KEY, Calendar.getInstance(
-                TimeZone.getTimeZone("UTC")
-            )
+            publicKey = BuildConfig.PUBLIC_KEY,
+            privateKey = BuildConfig.PRIVATE_KEY,
+            calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         )
     }
 
@@ -71,5 +57,19 @@ object NetworkModule {
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    @Provides
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory,
+        @BaseUrl baseUrl: String
+    ): MarvelApi {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+            .create(MarvelApi::class.java)
     }
 }

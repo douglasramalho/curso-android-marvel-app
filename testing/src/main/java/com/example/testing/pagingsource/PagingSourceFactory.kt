@@ -6,7 +6,7 @@ import com.example.core.domain.model.Character
 
 class PagingSourceFactory {
 
-    fun create(heroes: List<Character>) = object : PagingSource<Int, Character> (){
+    fun create(heroes: List<Character>) = object : PagingSource<Int, Character>() {
         override fun getRefreshKey(state: PagingState<Int, Character>) = 1
 
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
@@ -16,5 +16,6 @@ class PagingSourceFactory {
                 nextKey = 20
             )
         }
+
     }
 }

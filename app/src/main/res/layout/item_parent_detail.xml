@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_item_category"
+        app:layout_constraintTop_toBottomOf="@id/text_item_category"
         tools:itemCount="5"
         tools:listitem="@layout/item_child_detail" />
 

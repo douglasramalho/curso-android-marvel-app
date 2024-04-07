@@ -12,5 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="chipStyle">@style/MarvelChip</item>
+    </style>
+
+    <style name="MarvelChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/marvel_chip_background_color</item>
+        <item name="android:textColor">@color/marvel_chip_text_color</item>
+        <item name="checkedIconTint">@color/marvel_chip_text_color</item>
     </style>
 </resources>

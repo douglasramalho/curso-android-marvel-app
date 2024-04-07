@@ -8,14 +8,7 @@ import com.example.core.domain.model.Character
 class CharactersPagingSource(
     private val remoteDataSource: CharactersRemoteDataSource,
     private val query: String
-) : PagingSource<Int, com.example.core.domain.model.Character>() {
-
-    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(LIMIT) ?: anchorPage?.nextKey?.minus(LIMIT)
-        }
-    }
+) : PagingSource<Int, Character>() {
 
     @Suppress("TooGenericExceptionCaught")
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
@@ -42,10 +35,15 @@ class CharactersPagingSource(
                     responseOffset + LIMIT
                 } else null
             )
-
-
         } catch (exception: Exception) {
             LoadResult.Error(exception)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(LIMIT) ?: anchorPage?.nextKey?.minus(LIMIT)
         }
     }
 

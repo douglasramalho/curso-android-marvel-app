@@ -1,5 +1,3 @@
-package com.example.marvelapp
-
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *
@@ -16,12 +14,17 @@ package com.example.marvelapp
  * limitations under the License.
  */
 
+package com.example.marvelapp
+
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.StyleRes
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelStore
+import androidx.navigation.NavHostController
+import androidx.navigation.Navigation
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 
@@ -37,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,
     @StyleRes themeResId: Int = R.style.FragmentScenarioEmptyFragmentActivityTheme,
+    navHostController: NavHostController? = null,
     crossinline action: Fragment.() -> Unit = {}
 ) {
     val startActivityIntent = Intent.makeMainActivity(
@@ -55,6 +59,15 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
             T::class.java.name
         )
         fragment.arguments = fragmentArgs
+        fragment.viewLifecycleOwnerLiveData.observeForever { viewLifecycleOwner ->
+            if (viewLifecycleOwner != null) {
+                navHostController?.let {
+                    it.setViewModelStore(ViewModelStore())
+                    it.setGraph(R.navigation.main_nav)
+                    Navigation.setViewNavController(fragment.requireView(), it)
+                }
+            }
+        }
         activity.supportFragmentManager
             .beginTransaction()
             .add(android.R.id.content, fragment, "")
