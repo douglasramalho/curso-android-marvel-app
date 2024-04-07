@@ -52,7 +52,7 @@ class DetailFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             val logResult = when (uiState) {
                 DetailViewModel.UiState.Loading -> "Loading comics..."
-                is DetailViewModel.UiState.Success -> uiState.comics.toString()
+                is DetailViewModel.UiState.Success -> uiState.detailParentList.toString()
                 is DetailViewModel.UiState.Error -> "Error when loading comics"
             }
 
