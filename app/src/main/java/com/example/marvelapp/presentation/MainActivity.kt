@@ -34,7 +34,21 @@ class MainActivity : AppCompatActivity() {
     binding.bottomNavMain.setupWithNavController(navController)
 
     appBarConfiguration = AppBarConfiguration(
-      setOf()
+      // Indica quais telas são top level destination
+      setOf(
+        R.id.charactersFragment,
+        R.id.favoritesFragment,
+        R.id.aboutFragment
+      )
     )
+
+    binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      val isTopLevelDestination = appBarConfiguration.topLevelDestinations.contains(destination.id)
+      if (!isTopLevelDestination) {
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+      }
+    }
   }
 }
