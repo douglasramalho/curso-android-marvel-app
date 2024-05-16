@@ -1,5 +1,6 @@
 package com.example.marvelapp.framework.network.interceptor
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.math.BigInteger
@@ -39,7 +40,7 @@ class AuthorizationInterceptor(
 
     companion object {
         private const val QUERY_PARAMETER_TS = "ts"
-        private const val QUERY_PARAMETER_API = "apiKey"
+        private const val QUERY_PARAMETER_API = "apikey"
         private const val QUERY_PARAMETER_HASH = "hash"
     }
 
