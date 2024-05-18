@@ -20,4 +20,8 @@
         tools:listitem="@layout/item_character"
     />
 
+    <include
+        android:id="@+id/include_view_characters_error_state"
+        layout="@layout/include_view_characters_error_state" />
+
 </ViewFlipper>
