@@ -3,12 +3,13 @@ buildscript {
     ext.kotlin_version = "1.9.20"
     ext.nav_version = '2.7.0'
     ext.hilt_version = '2.50'
+    ext.detekt_version = '1.23.8'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.5.0'
+        classpath 'com.android.tools.build:gradle:8.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
@@ -16,6 +17,10 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("$detekt_version")
 }
 
 allprojects {
