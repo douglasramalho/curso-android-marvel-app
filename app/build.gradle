@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'dev.detekt'
 }
 
 apply plugin: 'kotlin-kapt'
@@ -8,14 +9,16 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
 
+apply from: "$rootDir/config/detekt/detekt.gradle"
+
 android {
     namespace 'com.example.marvelapp'
-    compileSdkVersion 36
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.example.marvelapp"
-        minSdkVersion 23
-        targetSdkVersion 34
+        minSdk 23
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -33,9 +36,15 @@ android {
         sourceCompatibility = 21
         targetCompatibility = 21
     }
+
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
+
+    implementation project(':core')
 
     // AndroidX
     implementation 'androidx.core:core-ktx:1.17.0'
